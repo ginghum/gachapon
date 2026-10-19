@@ -100,7 +100,7 @@
                     <h1 class="text-xl sm:text-2xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
                         無限！絶妙なミニキーホルダー
                     </h1>
-                    <p class="text-xs text-slate-400">絶対に誰も欲しがらない2000種類のカオスをコンプせよ！</p>
+                    <p class="text-xs text-slate-400">全2000種にオリジナル図形イラスト！カオスをコンプせよ！</p>
                 </div>
             </div>
             
@@ -3171,6 +3171,224 @@
             return rolledItem;
         }
 
+        // 名前の語句とジャンルから描く、小さなオリジナル図形イラスト。
+        // 同じ品は常に同じ配色・形。外部画像の取得は不要。
+        const itemArtCache = new Map();
+        function itemArtSpec(item) {
+            const n = item.name;
+            const rules = [
+                [/砂時計/, "hourglass"], [/自転車|三輪車/, "bike"], [/靴下|ソックス/, "sock"], [/花火/, "bomb"],
+                [/石|砂利|鉱石|隕石|化石/, 'stone'], [/通知|未読|チャット|LINE|メッセージ/, 'chat'],
+                [/沈黙|無言|無音/, 'silence'], [/資格|認定|許可|免許|検定|修了|合格/, 'certificate'],
+                [/時計|時刻|時間|遅刻|目覚まし/, 'clock'], [/砂時計/, 'hourglass'],
+                [/鍵|キー/, 'key'], [/プリン/, 'pudding'], [/パン|トースト/, 'bread'],
+                [/おにぎり|おむすび/, 'rice'], [/寿司|すし|鮨/, 'sushi'], [/卵|たまご/, 'egg'],
+                [/ラーメン|うどん|そば|パスタ|麺/, 'noodle'], [/弁当|重箱/, 'bento'],
+                [/肉|ステーキ|ハンバーグ|唐揚|チキン/, 'meat'], [/ケーキ|ケーキ|スイーツ/, 'cake'],
+                [/アイス|ソフトクリーム/, 'icecream'], [/ピザ/, 'pizza'], [/チーズ/, 'cheese'],
+                [/コーヒー|珈琲|ココア|紅茶|湯呑|マグ|カップ/, 'cup'], [/缶|炭酸|ジュース|ドリンク/, 'can'],
+                [/瓶|ボトル|ポーション|醤油|ソース/, 'bottle'], [/皿|食器|料理|食事/, 'plate'],
+                [/箸|フォーク|スプーン|トング/, 'fork'], [/塩|粉|砂糖|調味料/, 'jar'],
+                [/猫|ネコ|ねこ/, 'cat'], [/犬|イヌ|いぬ/, 'dog'], [/鳥|ひよこ|ニワトリ|鳩|ペンギン/, 'bird'],
+                [/魚|サメ|イルカ|金魚/, 'fish'], [/タコ|クラゲ|イカ/, 'jelly'], [/虫|蝶|蛾|蚊|蜂/, 'bug'],
+                [/河童|カッパ|蛙|カエル/, 'frog'], [/幽霊|お化け|ゴースト|亡霊/, 'ghost'],
+                [/宇宙人|エイリアン|火星人/, 'alien'], [/スライム|アメーバ/, 'slime'],
+                [/鬼|魔王|悪魔|ボス/, 'devil'], [/龍|ドラゴン|竜|恐竜/, 'dragon'], [/人形|ぬいぐるみ|クマ|熊/, 'bear'],
+                [/花|桜|ひまわり/, 'flower'], [/木|樹|枝|盆栽/, 'tree'], [/葉|草|苗|植物/, 'leaf'],
+                [/雨|傘/, 'umbrella'], [/雲|天気|台風/, 'cloud'], [/雪|氷|冷凍/, 'ice'],
+                [/太陽|日光|朝日/, 'sun'], [/月|夜空/, 'moon'], [/星|惑星|宇宙|銀河/, 'planet'],
+                [/電車|列車|改札|駅|線路/, 'train'], [/車|タクシー|バス|トラック/, 'car'],
+                [/自転車|三輪車|タイヤ/, 'bike'], [/飛行機|ドローン|ヘリ|ロケット/, 'rocket'], [/船|潜水艦/, 'boat'],
+                [/テレビ|モニター|画面|パソコン|PC|ブラウン管/, 'screen'], [/スマホ|携帯|電話/, 'phone'],
+                [/ゲーム|コントローラ|クソゲー/, 'game'], [/カメラ|写真|撮影/, 'camera'],
+                [/イヤホン|ヘッドホン/, 'headphones'], [/音楽|楽譜|音符|曲|歌|ラジオ|放送/, 'music'],
+                [/レンジ|トースター|炊飯器|ケトル/, 'appliance'], [/冷蔵庫|自販機/, 'fridge'],
+                [/扇風機|ファン/, 'fan'], [/掃除機|掃除ロボ/, 'vacuum'], [/洗濯機/, 'washer'],
+                [/充電|電源|コンセント|ケーブル|プラグ/, 'plug'], [/電球|ライト|懐中電灯|照明/, 'bulb'],
+                [/本(?!体|日|当|人|気|来|部)|ノート|辞書|雑誌|図書|手帳/, 'book'], [/紙|書|レシート|切符|券|札|票|名刺|領収/, 'paper'],
+                [/ペン|鉛筆|綿棒/, 'pencil'], [/消しゴム/, 'eraser'], [/定規|製図|図面/, 'ruler'],
+                [/ハサミ|鋏/, 'scissors'], [/テープ|シール/, 'tape'], [/封筒|手紙|郵便/, 'envelope'],
+                [/箱|宝箱|段ボール|宅配/, 'box'], [/袋|かばん|鞄|バッグ|財布/, 'bag'],
+                [/靴|スリッパ|スニーカー/, 'shoe'], [/靴下|ソックス/, 'sock'], [/服|シャツ|制服|洗濯|タオル/, 'shirt'],
+                [/帽子|王冠|称号/, 'crown'], [/眼鏡|メガネ|ルーペ/, 'glasses'],
+                [/布団|枕|ベッド|寝|睡眠/, 'bed'], [/椅子|席|座布団/, 'chair'], [/扉|ドア|窓|カーテン/, 'door'],
+                [/家|実家|屋敷|城|ビル|施設|ホテル|店|コンビニ/, 'house'],
+                [/トイレ|便器/, 'toilet'], [/風呂|温泉|銭湯/, 'bath'], [/歯|歯ブラシ/, 'tooth'],
+                [/鏡|反射/, 'mirror'], [/鈴|ベル|チャイム/, 'bell'],
+                [/金|コイン|小銭|円玉|硬貨|お釣|ポイント/, 'coin'], [/剣|刃|ナイフ/, 'sword'],
+                [/盾|鎧|アーマー/, 'shield'], [/爆弾|爆発|花火/, 'bomb'],
+                [/ネジ|歯車|部品|ハンドル/, 'gear'], [/工具|ハンマー|金槌/, 'hammer'],
+                [/紐|糸|コード|結び/, 'thread'], [/ボタン|スイッチ/, 'button'],
+                [/ハート|恋|愛|感情/, 'heart'], [/手|指|じゃんけん/, 'hand'], [/足|歩|跡/, 'foot'],
+                [/目|視線|監視/, 'eye'], [/口|声|ため息|叫/, 'mouth'], [/脳|記憶|夢|思考/, 'brain'],
+                [/旗|国|共和国/, 'flag'], [/看板|標識|表示|禁止/, 'sign'], [/地図|道|迷路|方角|羅針盤/, 'map'],
+                [/ボール|球|スポーツ|ダンベル/, 'ball'], [/穴|空洞|無|空気|透明|存在/, 'void']
+            ];
+            let kind = rules.find(([re]) => re.test(n))?.[1];
+            if (!kind) {
+                const emojiKinds = {
+                    '🪨':'stone','💬':'chat','🔑':'key','🍮':'pudding','🍞':'bread','🍙':'rice','🍣':'sushi','🥚':'egg','🍜':'noodle','🍝':'noodle','🍱':'bento','🍖':'meat','🍰':'cake','🍦':'icecream','🍕':'pizza','🧀':'cheese','☕':'cup','🥤':'can','🍶':'bottle','🍽️':'plate','🍴':'fork','🧂':'jar',
+                    '🐱':'cat','🐶':'dog','🐦':'bird','🐤':'bird','🐟':'fish','🐙':'jelly','🪼':'jelly','🦋':'bug','🐛':'bug','🐸':'frog','👻':'ghost','👽':'alien','👾':'devil','🐲':'dragon','🧸':'bear','🌸':'flower','🌻':'flower','🌳':'tree','🌿':'leaf','☂️':'umbrella','☁️':'cloud','🧊':'ice','☀️':'sun','🌙':'moon','🪐':'planet','🌍':'planet','⭐':'sun',
+                    '🚂':'train','🚃':'train','🚗':'car','🚲':'bike','🚀':'rocket','🛸':'planet','⛵':'boat','📺':'screen','💻':'screen','📱':'phone','🎮':'game','📷':'camera','🎧':'headphones','🎵':'music','🎶':'music','🔌':'plug','💡':'bulb','📖':'book','📚':'book','📓':'book','📜':'paper','🧾':'paper','📋':'paper','✏️':'pencil','📏':'ruler','✂️':'scissors','✉️':'envelope','📦':'box','👜':'bag','👟':'shoe','🧦':'sock','👕':'shirt','👑':'crown','👓':'glasses','🛏️':'bed','🪑':'chair','🚪':'door','🏠':'house','🚽':'toilet','🛁':'bath','🦷':'tooth','🪞':'mirror','🔔':'bell','🪙':'coin','🗡️':'sword','🛡️':'shield','💣':'bomb','⚙️':'gear','🔨':'hammer','🧵':'thread','❤️':'heart','👋':'hand','👣':'foot','👁️':'eye','🧠':'brain','🚩':'flag','🪧':'sign','🗺️':'map','⚽':'ball','🫧':'void','🕳️':'void','⌚':'clock','⏳':'hourglass'
+                };
+                // 初期ラインナップの絵文字は、品名が抽象的な場合の手がかりにする。
+                if (item.id <= 1500 || item.id >= 2001 && item.id <= 2395) kind = emojiKinds[item.emoji];
+            }
+            if (!kind) {
+                const categoryRules = [
+                    [/生物|妖怪|動物/, ['slime','bird','ghost','bear']],
+                    [/食|台所|デパ地下/, ['plate','cup','noodle','jar']],
+                    [/デジタル|ネット|ゲーム/, ['screen','chat','game','phone']],
+                    [/学問|学校|職場|会議|書|役所|資格/, ['paper','book','certificate','pencil']],
+                    [/宇宙|星/, ['planet','alien','rocket']], [/魔法|異世界|ダンジョン/, ['sword','bottle','shield','devil']],
+                    [/洗濯|寝室|ホテル|実家|家電/, ['shirt','bed','appliance','door']],
+                    [/海|水族館/, ['fish','jelly','boat']], [/音楽|映画/, ['music','headphones','camera']],
+                    [/旅|電車|宅配|乗り物/, ['car','map','bag','train']], [/庭|公園|天気/, ['flower','tree','cloud']],
+                    [/買い物|コンビニ|雑貨/, ['bag','box','can','coin']]
+                ];
+                const choices=categoryRules.find(([re])=>re.test(item.category))?.[1] || ['abstract','stone','void','orbit'];
+                kind=choices[item.id%choices.length];
+            }
+            let seed=2166136261;for(const ch of n+'|'+item.category) seed=Math.imul(seed^ch.codePointAt(0),16777619)>>>0;
+            return {kind, seed};
+        }
+        function createItemArtSVG(item) {
+            if (itemArtCache.has(item.id)) return itemArtCache.get(item.id);
+            const {kind,seed}=itemArtSpec(item);
+            const palettes=[['#f6bd60','#f28482'],['#84dcc6','#5b9bd5'],['#c4a7e7','#f6c1d1'],['#f5cac3','#84a59d'],['#9fc5e8','#e9c46a'],['#b7d88b','#f2b880'],['#e6a0b0','#9fa8da'],['#e5d4b1','#89b0ae']];
+            const [a,b]=palettes[seed%palettes.length], ink='#263449', light='#fff9ee';
+            const p=d=>`<path d="${d}"/>`,c=(x,y,r,fill=a)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}"/>`,r=(x,y,w,h,fill=a,rx=3)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}"/>`;
+            const eyes=(x=25,y=32)=>c(x,y,1.4,ink)+c(x+14,y,1.4,ink);
+            const motifs={
+                stone:()=>p('M14 41 19 24 35 18 48 29 51 43 37 50 21 48Z')+p('M19 24 31 34 48 29M31 34 37 50M14 41 31 34'),
+                chat:()=>p('M12 18H52V43H31L21 51V43H12Z')+c(23,30,2,ink)+c(32,30,2,ink)+c(41,30,2,ink)+c(49,17,7,b),
+                silence:()=>[21,32,43].map(x=>c(x,32,2.5,ink)).join('')+p('M17 45H47'),
+                certificate:()=>r(16,12,32,39,light)+p('M22 22H41M22 28H37')+c(36,39,6,b)+p('m32 44-2 10 6-3 6 3-2-10'),
+                clock:()=>c(32,33,20,light)+p('M32 20V33L42 39M25 8H39')+c(32,33,2,b),
+                hourglass:()=>p('M20 12H44M20 52H44M23 13V23L38 43V51M41 13V23L26 43V51')+p('M24 19H40L32 30Z')+p('M25 48 32 38 39 48Z'),
+                key:()=>c(24,24,11,a)+c(24,24,4,light)+p('m32 32 18 18m-7-7 5-5m-12-2 5-5'),
+                pudding:()=>p('M22 22H42L48 46Q32 53 16 46Z')+p('M22 22Q32 17 42 22L40 28Q32 32 24 28Z')+r(14,48,36,3,b),
+                bread:()=>p('M19 28C6 14 23 9 32 15 43 9 58 16 45 28V49H19Z')+p('M25 31V40M33 29V39'),
+                rice:()=>p('M28 15Q32 10 36 15L52 43Q55 50 46 50H18Q9 50 12 43Z')+r(25,36,14,15,ink,1),
+                sushi:()=>r(13,28,38,21,light,8)+p('M11 24Q32 10 53 24L50 34H14Z')+p('m20 23 7 8m4-11 7 10m4-9 6 7'),
+                egg:()=>p('M32 12C20 12 12 35 17 46S48 56 49 40 43 12 32 12Z')+c(32,37,9,b),
+                noodle:()=>p('M11 32H53Q49 52 32 52T11 32Z')+p('M23 31V17Q29 9 29 18V28M35 31V17Q41 9 41 18V27M13 12 53 17'),
+                bento:()=>r(10,20,44,31,a,6)+r(14,24,19,22,light,2)+p('M37 23V48M37 35H51')+c(23,34,4,b)+c(44,29,4,b)+p('m41 40 7 4'),
+                meat:()=>p('M17 22C29 8 54 20 51 34S31 56 17 45 9 30 17 22Z')+c(35,29,6,light)+p('m20 29 7 7m-9 1 7 7'),
+                cake:()=>p('M14 31 42 18 51 33V49H14Z')+p('M14 38H51M14 44H51')+c(35,22,5,b)+p('m35 17 3-6'),
+                icecream:()=>p('M22 32 32 55 43 32Z')+p('m25 38 12 7m-8 2 12-9')+c(32,25,14,b)+c(24,28,8,a),
+                pizza:()=>p('M13 18Q32 8 52 20L31 53Z')+p('M14 20Q32 11 49 22')+c(29,27,4,b)+c(36,38,3,b)+c(24,34,2,ink),
+                cheese:()=>p('M13 31 41 16 52 30V49H13Z')+p('M13 31H52')+c(24,40,4,light)+c(43,39,3,light),
+                cup:()=>p('M15 24H43V44Q29 54 15 44Z')+p('M43 27H48Q58 35 44 40M22 17Q18 12 23 8M32 17Q28 12 33 8M12 52H49'),
+                can:()=>r(20,13,25,41,a,7)+p('M22 19H43M22 47H43')+r(25,26,15,13,b)+p('M29 15H36'),
+                bottle:()=>p('M26 10H38V22L45 30V51H19V30L26 22Z')+r(26,8,12,6,b,1)+r(20,34,24,12,light),
+                plate:()=>c(32,33,22,light)+c(32,33,15,a)+p('M13 17 51 48')+c(32,33,5,b),
+                fork:()=>p('M22 12V30M16 12V22Q22 32 28 22V12M22 29V53M43 12Q33 29 42 32H45V53M45 12V33'),
+                jar:()=>r(19,20,27,32,a,5)+r(17,13,31,9,b,2)+r(23,30,19,12,light,2)+c(32,36,3,b),
+                cat:()=>p('M15 28 15 13 27 21Q32 19 37 21L49 13V30Q57 50 32 51T15 28Z')+eyes()+p('m29 39 3 3 3-3M12 36H22M42 36H52'),
+                dog:()=>p('M20 22Q32 12 44 22V43Q32 55 20 43Z')+p('M20 22Q7 19 10 39L20 34M44 22Q57 19 54 39L44 34')+eyes()+c(32,40,3,b),
+                bird:()=>p('M18 32Q14 13 30 16T46 33Q50 51 29 50L15 43Z')+p('M44 29 55 34 44 38M27 50V55M36 50V55M23 31Q33 28 34 41')+c(36,25,2,ink),
+                fish:()=>p('M13 32Q30 10 45 29L55 21V45L45 36Q30 55 13 32Z')+c(24,29,2,ink)+p('M37 22Q29 33 37 43'),
+                jelly:()=>p('M14 33Q15 11 32 12T50 33Z')+p('M19 34Q12 46 22 53M29 34Q23 44 32 54M40 34Q35 47 44 52')+eyes(25,26),
+                bug:()=>p('M32 19V50M19 25 11 19M19 34H9M21 44 12 51M45 25 53 19M45 34H55M43 44 52 51')+c(32,34,15,a)+p('M32 20V49')+c(32,16,7,b)+eyes(28,15),
+                frog:()=>c(22,22,9,a)+c(42,22,9,a)+p('M13 31Q32 17 51 31V44Q32 56 13 44Z')+eyes(23,22)+p('M23 39Q32 45 41 39'),
+                ghost:()=>p('M16 51V29Q16 10 32 12T48 29V51L40 46 32 52 24 46Z')+eyes(25,30)+c(32,40,3,b),
+                alien:()=>p('M32 12Q3 12 15 34L32 51 49 34Q61 12 32 12Z')+p('M19 26Q29 25 28 35Q19 34 19 26ZM45 26Q35 25 36 35Q45 34 45 26Z')+p('M29 43H35'),
+                slime:()=>p('M11 45Q11 31 24 27L32 12 40 27Q53 31 53 45Q32 57 11 45Z')+eyes(25,37)+p('M29 44H35'),
+                devil:()=>p('M17 25 12 10 29 20M47 25 52 10 35 20')+c(32,35,19,a)+eyes()+p('m23 43 9 5 9-5'),
+                dragon:()=>p('M14 45 19 25 28 30 35 13 49 23 43 32 51 42 35 50Z')+p('m20 26-6-9m27 16 11-6M23 44 34 40')+c(39,25,2,ink),
+                bear:()=>c(18,19,9,b)+c(46,19,9,b)+c(32,34,21,a)+eyes(25,29)+c(32,40,9,light)+c(32,37,3,ink),
+                flower:()=>[[-11,0],[11,0],[0,-11],[0,11]].map(([x,y])=>c(32+x,27+y,9,a)).join('')+c(32,27,7,b)+p('M32 43V56M32 49Q17 39 19 49Z'),
+                tree:()=>p('M29 30H36V55H29Z')+c(24,27,13,a)+c(39,26,14,b)+c(32,17,12,a),
+                leaf:()=>p('M13 46Q10 12 51 14Q52 53 13 46Z')+p('m13 46 30-25M26 34V24M34 28H44M21 40H35'),
+                umbrella:()=>p('M10 32Q32 3 54 32Q43 27 40 32Q32 27 24 32Q16 27 10 32Z')+p('M32 15V49Q32 60 22 53M20 14V18M43 10V14'),
+                cloud:()=>p('M16 43C0 36 11 20 22 26 25 8 45 13 45 27 61 25 61 44 48 44Z')+p('m22 49-3 5m15-5-3 5m15-5-3 5'),
+                ice:()=>p('m17 22 20-9 14 12V46L29 55 13 42Z')+p('m17 22 13 10 21-7M30 32 29 55M22 29 23 43M35 22 41 19'),
+                sun:()=>c(32,32,12,a)+p('M32 7V14M32 50V57M7 32H14M50 32H57M14 14 19 19M45 45 50 50M14 50 19 45M45 19 50 14'),
+                moon:()=>p('M43 12C11 5 7 47 33 52Q45 53 51 42C25 47 20 22 43 12Z')+p('m48 17 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z'),
+                planet:()=>c(32,32,17,a)+p('M16 26C-4 37 9 52 35 40S69 14 48 24')+c(27,25,4,b)+c(39,37,2,light),
+                train:()=>r(16,11,32,39,a,7)+r(21,18,22,14,light)+p('M19 54 24 48M45 54 40 48M21 38H25M39 38H43')+c(24,44,2,ink)+c(40,44,2,ink),
+                car:()=>p('M12 32 19 19H43L51 32V47H12Z')+p('M12 32H51M25 20V32M39 20V32')+c(20,47,5,ink)+c(43,47,5,ink)+r(17,37,8,4,light),
+                bike:()=>c(17,41,11,light)+c(48,41,11,light)+p('m17 41 10-19 11 19H17L33 27 48 41M24 21H32M41 17H46L48 41'),
+                rocket:()=>p('M26 42Q14 25 32 9Q50 25 38 42ZM24 29 15 41 25 39M40 29 49 41 39 39')+c(32,26,6,light)+p('m26 46 6 12 6-12'),
+                boat:()=>p('M10 37H54L45 51H19ZM32 11V36M30 14 15 32H30M36 18 47 32H36M9 56Q16 51 23 56T37 56T53 56'),
+                screen:()=>r(10,13,44,31,a,4)+r(15,18,34,21,ink,1)+p('M32 44V53M23 54H41')+p('m21 25 5 4-5 4M32 33H41'),
+                phone:()=>r(21,9,24,46,a,5)+r(25,17,16,28,light,1)+p('M29 13H36')+c(33,50,1.5,ink),
+                game:()=>p('M19 22H45Q53 26 55 45Q53 55 41 42H23Q11 55 9 45Q11 26 19 22Z')+p('M22 29V39M17 34H27')+c(42,30,2,b)+c(47,36,2,b),
+                camera:()=>r(10,23,44,28,a,4)+p('M20 23 24 15H38L42 23')+c(32,37,10,light)+c(32,37,5,b)+c(47,29,2,ink),
+                headphones:()=>p('M14 38V30Q14 9 32 11T50 30V38')+r(10,30,10,20,a,5)+r(44,30,10,20,b,5),
+                music:()=>p('M26 44V17L47 12V38M26 24 47 19')+c(19,45,7,a)+c(40,39,7,b),
+                appliance:()=>r(10,18,44,31,a,4)+r(15,23,25,19,ink,2)+c(47,29,2,b)+c(47,38,2,light)+p('M16 49V53M48 49V53'),
+                fridge:()=>r(17,8,30,48,a,4)+p('M18 29H46M24 18V24M24 36V44')+r(35,14,7,9,light,1),
+                fan:()=>c(32,27,19,light)+p('M32 47V55M22 55H42')+p('M32 27Q11 11 29 11L32 27Q55 12 48 30L32 27Q36 51 22 40Z')+c(32,27,4,b),
+                vacuum:()=>c(32,37,20,a)+p('M13 38H51M20 24Q32 16 44 24')+c(32,32,4,b)+r(25,43,14,5,ink),
+                washer:()=>r(14,10,36,45,a,4)+p('M15 21H49')+c(32,37,12,light)+p('M21 38Q27 31 33 38T43 38')+c(21,16,2,ink),
+                plug:()=>p('M22 11V23M40 11V23M18 23H44V33Q44 45 31 45T18 33ZM31 45V55')+p('m30 27-5 8h10l-5 7'),
+                bulb:()=>p('M24 43Q24 37 19 31C8 10 53 7 47 28Q46 35 40 43ZM24 49H40M28 55H36M28 27 32 35 36 27M32 35V43'),
+                book:()=>p('M32 18Q22 11 10 15V48Q23 44 32 50Q42 44 54 48V15Q42 11 32 18Z')+p('M32 18V50M16 23 25 24M16 30 25 31M39 24 48 23'),
+                paper:()=>p('M18 10H38L49 21V54H18ZM38 10V21H49')+p('M24 29H42M24 36H42M24 43H35'),
+                pencil:()=>p('m16 41 27-28 9 9-27 28-13 3Z')+p('m16 41 9 9M39 17 48 26M12 53 16 41'),
+                eraser:()=>p('m12 37 25-25 17 17-24 25H23Z')+p('m26 23 17 17M30 54H55'),
+                ruler:()=>p('m10 40 32-28 12 13-32 28Z')+p('m20 33 5 5m2-11 7 8m1-15 5 5m2-11 7 8'),
+                scissors:()=>c(20,44,8,light)+c(44,44,8,a)+p('m25 38 21-26M39 38 18 12')+c(32,29,2,b),
+                tape:()=>c(29,29,19,a)+c(29,29,9,light)+p('M48 29V47H57V55H40V44'),
+                envelope:()=>r(10,20,44,29,a,2)+p('m11 21 21 17 21-17M11 48 16-15M53 48 37 33'),
+                box:()=>p('m12 22 20-10 20 10V46L32 56 12 46Z')+p('m12 22 20 10 20-10M32 32V56M23 17 20 10v9'),
+                bag:()=>p('M15 24H49L53 53H11ZM23 24V18Q32 5 41 18V24')+p('M22 38Q32 46 42 38'),
+                shoe:()=>p('M15 16H29L33 34 49 38Q56 40 53 49H10V35Z')+p('M11 44H53M29 29 35 27M31 34 38 32'),
+                sock:()=>p('M27 11H45V35L29 51Q19 57 13 47T22 33H27Z')+p('M27 19H45M18 37 29 49'),
+                shirt:()=>p('m23 14-16 9 8 13 7-5V53H43V31L50 36 58 23 41 14Q32 25 23 14Z')+p('M26 42H38'),
+                crown:()=>p('m12 20 10 9 10-17 10 17 10-9-5 30H17Z')+p('M17 43H47')+c(32,34,3,b),
+                glasses:()=>c(20,33,12,light)+c(46,33,12,light)+p('M32 31H34M8 31 6 23M58 31 60 23')+p('m15 28 4-3m22 3 4-3'),
+                bed:()=>p('M10 22V54M54 31V54M10 45H54')+r(13,28,15,12,light)+p('M28 28H46Q54 28 54 39V45H28Z'),
+                chair:()=>r(20,10,24,24,a,4)+r(16,37,32,8,b,2)+p('M21 34V37M43 34V37M21 45V56M43 45V56'),
+                door:()=>r(17,9,30,47,a,1)+p('M23 56V16H41V56')+c(36,36,2,ink),
+                house:()=>p('m9 29 23-20 23 20H49V54H15V29Z')+r(27,36,11,18,b,1)+r(20,27,7,7,light,1),
+                toilet:()=>r(31,13,20,23,a,2)+p('M13 31H51Q51 47 36 47V55H22V46Q13 41 13 31Z')+p('M15 36H49')+c(43,21,2,ink),
+                bath:()=>p('M10 32H54L49 49H17ZM17 49V55M47 49V55M14 31V19Q14 9 23 14V20')+c(33,26,4,b)+c(43,22,6,light),
+                tooth:()=>p('M32 18C8 4 11 28 17 43Q23 67 29 38Q32 30 35 38Q41 67 47 43C53 28 56 4 32 18Z')+p('M23 23Q26 20 29 23'),
+                mirror:()=>p('M27 42H37V54H27Z')+`<ellipse cx="32" cy="26" rx="18" ry="20" fill="${a}"/>`+p('m24 27 13-13m-8 21 13-13'),
+                bell:()=>p('M14 43Q20 39 20 27Q20 14 32 14T44 27Q44 39 50 43ZM27 49Q32 57 37 49M32 9V14'),
+                coin:()=>c(32,32,21,a)+c(32,32,15,b)+p('M25 21 32 31 39 21M32 31V44M25 33H39M25 39H39'),
+                sword:()=>p('M41 10 52 10 52 21 29 44 20 35ZM15 30 34 49M21 42 12 51 16 55 25 46')+p('m25 38 22-22'),
+                shield:()=>p('m12 15 20-6 20 6V32Q50 46 32 56Q14 46 12 32Z')+p('M32 16V47M20 30H44'),
+                bomb:()=>c(30,37,18,a)+p('m35 19 3-9 9 2M47 12 53 8M49 16H57M45 8V3')+p('M19 31Q19 24 26 24'),
+                gear:()=>p('m25 11 2 7-8 4-6-4-6 11 7 4v8l-7 3 6 11 7-4 7 4-1 7h13l1-7 7-4 6 4 6-11-7-4v-8l7-3-6-11-7 4-7-4-1-7Z')+c(32,34,9,light),
+                hammer:()=>p('m30 26-18 25 7 5 18-25M24 18 36 6 55 24 44 36Z')+p('m31 13 19 18'),
+                thread:()=>r(20,17,24,30,a,2)+p('M16 13H48M16 51H48M21 23 43 30M21 31 43 38M21 39 43 46M44 45Q57 54 54 33'),
+                button:()=>c(32,32,21,a)+[[-5,-5],[5,-5],[-5,5],[5,5]].map(([x,y])=>c(32+x,32+y,2,ink)).join('')+c(32,32,16,'none'),
+                heart:()=>p('M32 22C13 1 0 30 17 43L32 55 47 43C64 30 51 1 32 22Z')+p('M18 22Q22 17 25 23'),
+                hand:()=>p('M21 33V19Q25 12 28 20V30 12Q32 6 35 13V30 16Q39 10 42 18V33 24Q47 20 49 27V44Q40 61 27 51L13 38Q10 30 17 31Z'),
+                foot:()=>p('M24 31Q17 41 22 51Q30 61 38 50L43 33Q43 24 34 25Z')+c(40,16,6,b)+c(28,16,4,a)+c(19,21,3,a),
+                eye:()=>p('M7 32Q32 4 57 32Q32 60 7 32Z')+c(32,32,12,b)+c(32,32,5,ink)+c(36,28,2,light),
+                mouth:()=>p('M12 29Q32 18 52 29Q33 62 12 29Z')+p('M14 30H49')+p('M24 44Q32 35 41 44'),
+                brain:()=>p('M32 15C20 5 12 17 16 24C4 27 10 42 17 42C18 55 30 56 32 48C36 59 49 52 48 43C61 37 54 25 49 24C54 12 39 7 32 15Z')+p('M32 16V48M20 24 26 30 21 36M43 22 38 30 44 37'),
+                flag:()=>p('M16 56V10M17 13Q26 6 36 14T54 14V36Q45 42 35 35T17 35Z'),
+                sign:()=>p('M32 40V56')+r(10,14,44,27,a,3)+p('M23 27H42M35 21 42 27 35 33'),
+                map:()=>p('m10 16 14-5 16 6 14-5V48L40 53 24 47 10 52Z')+p('M24 12V47M40 17V52M15 29Q31 42 47 26')+c(43,29,3,b),
+                ball:()=>c(32,32,22,a)+p('m32 21 10 7-4 12H25L21 28ZM32 10V21M10 26 21 28M42 28 54 24M38 40 45 50M25 40 19 50'),
+                void:()=>c(32,32,20,'none')+p('M19 45 45 19')+c(32,32,4,b),
+                abstract:()=>p('m12 43 14-28 16 28Z')+c(41,26,12,b)+r(28,38,23,12,light,2),
+                orbit:()=>c(32,32,5,b)+`<ellipse cx="32" cy="32" rx="24" ry="11" fill="none" transform="rotate(35 32 32)"/>`+`<ellipse cx="32" cy="32" rx="24" ry="11" fill="none" transform="rotate(-35 32 32)"/>`
+            };
+            let art=(motifs[kind]||motifs.abstract)();
+            // 品名にある異常を、小さな図形で添える。
+            let accent='';
+            if (/壊|バグ|故障|欠陥|割れ|ひび/.test(item.name)) accent=p('m30 14-4 12 10 6-9 12');
+            else if (/禁止|断る|拒|できない|出ない|無理/.test(item.name)) accent=c(46,45,10,light)+p('m39 52 14-14');
+            else if (/消え|透明|見えない|存在しない/.test(item.name)) accent=p('M10 18H20M7 26H17M10 34H20');
+            else if (/怒|反抗|叱|暴走/.test(item.name)) accent=p('M46 10V17H53M42 14H48V21');
+            else if (/寝|眠|休暇|有給/.test(item.name)) accent=p('M44 10H53L44 18H53');
+            else if (/永遠|無限|終わらない/.test(item.name)) accent=p('M39 13C33 3 26 15 33 16S43 3 48 10 42 20 39 13');
+            else if (/逆|戻|巻き/.test(item.name)) accent=p('M43 10Q58 13 52 25M52 17V25H44');
+            else if (/謎|秘密|不明/.test(item.name)) accent=p('M45 13Q45 6 51 9Q57 13 50 18V21')+c(50,26,1,ink);
+            const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+            const angle=((seed>>>8)%7-3)*2;
+            const spark=item.rarity==='SEC'||item.rarity==='COMP'?p('m9 7 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z')+p('m55 47 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z'):'';
+            const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%" role="img" aria-label="${esc(item.name)}" style="display:block;overflow:visible"><title>${esc(item.name)}</title><g stroke="${ink}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="${a}"><g transform="rotate(${angle} 32 32)">${art}</g><g fill="none" stroke="${b}" stroke-width="2.5">${accent}</g><g fill="${b}" stroke-width="1.5">${spark}</g></g></svg>`;
+            itemArtCache.set(item.id,svg);return svg;
+        }
+
         // キーホルダー実体（ボールチェーン付き）のHTML生成
         function createKeychainHTML(item, size = 'md') {
             const sizeClasses = {
@@ -3192,7 +3410,7 @@
                     <div class="${sizeClasses.body} rounded-2xl flex items-center justify-center relative border-2 border-white/50 backdrop-blur-sm shadow-lg transition-transform" style="background-color: ${item.color}33; border-color: ${item.color}; transform: rotate(${Math.sin(item.id) * 10}deg);">
                         <div class="absolute inset-0.5 rounded-xl bg-gradient-to-tr from-transparent via-white/10 to-white/40 pointer-events-none"></div>
                         <div class="absolute top-1 w-2 h-2 rounded-full bg-slate-900 border border-white/40"></div>
-                        <span class="z-10 filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">${item.emoji}</span>
+                        <span class="z-10" style="width:88%;height:88%;display:block">${createItemArtSVG(item)}</span>
                         <span class="absolute -bottom-1 -right-1 px-1 rounded font-black text-[8px] border bg-slate-950 ${rarityLabels[item.rarity].class}">
                             ${item.rarity}
                         </span>
