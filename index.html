@@ -18,6 +18,9 @@
             background-color: #0f172a;
             color: #f1f5f9;
         }
+        #collection-grid { contain: layout style; }
+        .collection-lite #collection-grid > div { box-shadow: none; transition: none; transform: none; }
+        .collection-lite #collection-grid .lite-icon { font-size: 28px; line-height: 1; }
         /* キーホルダーがぶらぶら揺れるアニメーション */
         @keyframes swing {
             0% { transform: rotate(-6deg); }
@@ -240,6 +243,7 @@
                 <!-- フィルタバー (ジャンル機能追加) -->
                 <div class="flex flex-col bg-slate-900 p-2.5 rounded-xl border border-slate-800 gap-3 shadow-inner">
                     <div class="flex flex-wrap justify-between items-center gap-2">
+                        <button id="btn-collection-lite" type="button" aria-pressed="true" class="px-3 py-2 rounded-lg text-xs font-bold bg-emerald-900 text-emerald-200 border border-emerald-700">軽量化：ON</button>
                         <!-- レアリティフィルタ -->
                         <div class="flex gap-1 flex-wrap">
                             <button class="btn-rarity-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30" data-filter="all">全レア</button>
@@ -277,6 +281,12 @@
                     </div>
                 </div>
 
+                <p id="collection-mode-hint" class="text-xs text-slate-400 px-1">軽量化中：一覧は簡易アイコン・60件ずつ表示。タップするとイラストと説明を確認できます。</p>
+                <div id="collection-pagination" class="flex items-center justify-between gap-3" aria-label="図鑑のページ切り替え">
+                    <button id="collection-prev" type="button" class="px-4 py-2 rounded-lg bg-slate-800 text-sm disabled:opacity-40">前へ</button>
+                    <span id="collection-page-status" role="status" class="text-xs text-slate-300"></span>
+                    <button id="collection-next" type="button" class="px-4 py-2 rounded-lg bg-slate-800 text-sm disabled:opacity-40">次へ</button>
+                </div>
                 <!-- 図鑑グリッド -->
                 <div id="collection-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 max-h-[500px] overflow-y-auto pr-1">
                     <!-- JSで全アイテムがズラリ -->
@@ -3025,6 +3035,19 @@
         let soundEnabled = true;
         let activeTab = 'backpack';
         let collectionDirty = true;
+        let collectionLite = true;
+        let collectionPage = 0;
+        const COLLECTION_PAGE_SIZE = 60;
+        function updateCollectionMode() {
+            document.getElementById('panel-collection').classList.toggle('collection-lite', collectionLite);
+            const button = document.getElementById('btn-collection-lite');
+            button.textContent = '軽量化：' + (collectionLite ? 'ON' : 'OFF');
+            button.setAttribute('aria-pressed', String(collectionLite));
+            document.getElementById('collection-mode-hint').textContent = collectionLite
+                ? '軽量化中：一覧は簡易アイコン・60件ずつ表示。タップするとイラストと説明を確認できます。'
+                : '通常表示：すべてのアイテムをイラスト付きで表示します。';
+            document.getElementById('collection-pagination').style.display = collectionLite ? '' : 'none';
+        }
         let searchTimer;
         const itemById = new Map(gachaItems.map(item => [item.id, item]));
         const itemsByRarity = Object.fromEntries(Object.keys(rarityWeights).map(r => [r, regularGachaItems.filter(item => item.rarity === r)]));
@@ -3073,6 +3096,8 @@
             const preference = SafeStorage.get(STORAGE_KEY + '_sound') ?? SafeStorage.get('mugen_gacha_v4_sound') ?? SafeStorage.get('mugen_gacha_v3_sound');
             soundEnabled = preference !== 'off';
             updateSoundButton();
+            collectionLite = SafeStorage.get(STORAGE_KEY + '_collection_lite') !== 'off';
+            updateCollectionMode();
             initCategorySelect();
             updateUI();
             if (!SafeStorage.get(STORAGE_KEY)) saveData();
@@ -3255,90 +3280,78 @@
         }
 
         // 図鑑の描画 (フィルタリング込み)
-        function renderCollection() {
+        function renderCollection(keepPage = false) {
             const grid = document.getElementById('collection-grid');
             if (!grid) return;
-            grid.innerHTML = '';
-
+            if (keepPage !== true) collectionPage = 0;
             collectionDirty = false;
-            let shownCount = 0;
+            const matches = regularGachaItems.filter(item => {
+                const owned = state.collected[item.id] > 0;
+                if (currentRarityFilter !== 'all' && item.rarity !== currentRarityFilter) return false;
+                if (currentOwnershipFilter === 'owned' && !owned) return false;
+                if (currentOwnershipFilter === 'uncollected' && owned) return false;
+                if (currentCategoryFilter !== 'all' && item.category !== currentCategoryFilter) return false;
+                if (currentSearchQuery && (!owned || !(item.name + ' ' + item.desc).toLowerCase().includes(currentSearchQuery))) return false;
+                return true;
+            });
+            const comp = itemById.get(2000);
+            if (state.collected[2000] > 0 && currentOwnershipFilter !== 'uncollected' && currentRarityFilter === 'all' && currentCategoryFilter === 'all' && (!currentSearchQuery || (comp.name + ' ' + comp.desc).toLowerCase().includes(currentSearchQuery))) matches.push(comp);
 
-            // コンプアイテムを含めない形でループ
-            regularGachaItems.forEach(item => {
-                const isCollected = state.collected[item.id] > 0;
-
-                // レアリティフィルタ
-                if (currentRarityFilter !== 'all' && item.rarity !== currentRarityFilter) return;
-
-                // 所持状況はレアリティ・ジャンル・検索と併用可能
-                if (currentOwnershipFilter === 'owned' && !isCollected) return;
-                if (currentOwnershipFilter === 'uncollected' && isCollected) return;
-                
-                // ジャンルフィルタ
-                if (currentCategoryFilter !== 'all' && item.category !== currentCategoryFilter) {
-                    return;
-                }
-                
-                // キーワード検索 (名前や説明文で検索)
-                if (currentSearchQuery) {
-                    const targetText = isCollected ? (item.name + " " + item.desc).toLowerCase() : "";
-                    if (!targetText.includes(currentSearchQuery)) {
-                        return;
-                    }
-                }
-
-                shownCount++;
+            const pages = Math.max(1, Math.ceil(matches.length / COLLECTION_PAGE_SIZE));
+            collectionPage = Math.min(collectionPage, pages - 1);
+            const offset = collectionLite ? collectionPage * COLLECTION_PAGE_SIZE : 0;
+            const visible = collectionLite ? matches.slice(offset, offset + COLLECTION_PAGE_SIZE) : matches;
+            const fragment = document.createDocumentFragment();
+            for (const item of visible) {
+                const owned = state.collected[item.id] > 0;
+                const complete = item.rarity === 'COMP';
                 const card = document.createElement('div');
-                
-                if (isCollected) {
-                    card.className = "bg-slate-900/90 border border-slate-800 hover:border-purple-500/80 p-2.5 rounded-xl flex flex-col items-center justify-between text-center cursor-pointer transition-all hover:scale-105 active:scale-95 shadow-md relative";
-                    card.innerHTML = `
-                        <div class="h-16 flex items-center justify-center mb-1.5 keychain-swing pointer-events-none">
-                            ${createKeychainHTML(item, 'sm')}
-                        </div>
-                        <div class="text-[10px] font-black text-slate-200 truncate w-full mb-1">${item.name}</div>
-                        <div class="text-[8px] text-slate-400">× ${state.collected[item.id]}個</div>
-                    `;
+                card.className = owned
+                    ? "bg-slate-900/90 border border-slate-800 hover:border-purple-500/80 p-2.5 rounded-xl flex flex-col items-center justify-between text-center cursor-pointer transition-all hover:scale-105 active:scale-95 shadow-md relative"
+                    : "bg-slate-950/40 border border-slate-900/60 p-2.5 rounded-xl flex flex-col items-center justify-between text-center opacity-60";
+                if (owned) {
+                    const visual = document.createElement('div');
+                    visual.className = collectionLite ? 'h-16 flex items-center justify-center lite-icon' : 'h-16 flex items-center justify-center mb-1.5 keychain-swing pointer-events-none';
+                    if (collectionLite) visual.textContent = item.emoji;
+                    else visual.innerHTML = createKeychainHTML(item, 'sm');
+                    card.appendChild(visual);
+                    card.setAttribute('role', 'button');
+                    card.tabIndex = 0;
+                    card.dataset.keyboardReady = 'true';
+                    card.addEventListener('keydown', event => {
+                        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); card.click(); }
+                    });
                     card.addEventListener('click', () => openDetailModal(item));
                 } else {
-                    card.className = "bg-slate-950/40 border border-slate-900/60 p-2.5 rounded-xl flex flex-col items-center justify-between text-center shadow-inner relative opacity-60";
-                    card.innerHTML = `
-                        <div class="h-16 flex items-center justify-center mb-1.5 filter brightness-0 opacity-40">
-                            <i class="fa-solid fa-question text-3xl text-slate-600"></i>
-                        </div>
-                        <div class="text-[10px] font-extrabold text-slate-600 truncate w-full mb-1">???</div>
-                        <div class="text-[8px] text-slate-700">未所持</div>
-                    `;
+                    const unknown = document.createElement('div');
+                    unknown.className = 'h-16 flex items-center justify-center text-3xl text-slate-600';
+                    unknown.textContent = '?';
+                    card.appendChild(unknown);
                 }
-                grid.appendChild(card);
-            });
-
-            // コンプリート特典を持っている場合は特別に末尾に追加
-            if (state.collected[2000] > 0 && currentOwnershipFilter !== 'uncollected' && currentRarityFilter === 'all' && currentCategoryFilter === 'all' && (!currentSearchQuery || (itemById.get(2000).name + ' ' + itemById.get(2000).desc).toLowerCase().includes(currentSearchQuery))) {
-                const compItem = gachaItems.find(i => i.id === 2000);
-                shownCount++;
-                const card = document.createElement('div');
-                card.className = "bg-yellow-900/40 border border-yellow-500/80 p-2.5 rounded-xl flex flex-col items-center justify-between text-center cursor-pointer transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(234,179,8,0.2)] relative";
-                card.innerHTML = `
-                    <div class="h-16 flex items-center justify-center mb-1.5 keychain-swing pointer-events-none">
-                        ${createKeychainHTML(compItem, 'sm')}
-                    </div>
-                    <div class="text-[10px] font-black text-yellow-300 truncate w-full mb-1">${compItem.name}</div>
-                    <div class="text-[8px] text-yellow-500 font-bold">COMP 特典</div>
-                `;
-                card.addEventListener('click', () => openDetailModal(compItem));
-                grid.appendChild(card);
+                const name = document.createElement('div');
+                name.className = 'text-[10px] font-bold truncate w-full mb-1 ' + (complete ? 'text-yellow-300' : 'text-slate-200');
+                name.textContent = owned ? item.name : '???';
+                card.appendChild(name);
+                const count = document.createElement('div');
+                count.className = 'text-[8px] text-slate-400';
+                count.textContent = owned ? (complete ? 'COMP 特典' : item.rarity + ' · × ' + state.collected[item.id] + '個') : '未所持';
+                card.appendChild(count);
+                fragment.appendChild(card);
             }
-
-            if (shownCount === 0) {
+            if (!matches.length) {
                 const empty = document.createElement('p');
-                empty.className = "col-span-full py-10 text-center text-sm text-slate-400";
-                empty.textContent = currentOwnershipFilter === 'owned'
-                    ? '条件に合う所持アイテムがありません。'
-                    : '条件に合うアイテムがありません。';
-                grid.appendChild(empty);
+                empty.className = 'col-span-full py-10 text-center text-sm text-slate-400';
+                empty.textContent = currentOwnershipFilter === 'owned' ? '条件に合う所持アイテムがありません。' : '条件に合うアイテムがありません。';
+                fragment.appendChild(empty);
             }
-            document.getElementById('filter-stats-txt').textContent = `${shownCount} 種類表示中`;
+            grid.replaceChildren(fragment);
+            grid.scrollTop = 0;
+            document.getElementById('filter-stats-txt').textContent = collectionLite
+                ? matches.length + '種類中 ' + visible.length + '種類表示'
+                : matches.length + ' 種類表示中';
+            document.getElementById('collection-page-status').textContent = (collectionPage + 1) + ' / ' + pages + 'ページ' + (matches.length ? '（' + (offset + 1) + '〜' + (offset + visible.length) + '件）' : '');
+            document.getElementById('collection-prev').disabled = collectionPage === 0;
+            document.getElementById('collection-next').disabled = collectionPage >= pages - 1;
         }
 
         function openDetailModal(item) {
@@ -3984,6 +3997,20 @@
 
         window.addEventListener('load', () => {
             loadData();
+            document.getElementById('btn-collection-lite').addEventListener('click', () => {
+                collectionLite = !collectionLite;
+                SafeStorage.set(STORAGE_KEY + '_collection_lite', collectionLite ? 'on' : 'off');
+                updateCollectionMode();
+                renderCollection();
+            });
+            document.getElementById('collection-prev').addEventListener('click', () => {
+                collectionPage = Math.max(0, collectionPage - 1);
+                renderCollection(true);
+            });
+            document.getElementById('collection-next').addEventListener('click', () => {
+                collectionPage++;
+                renderCollection(true);
+            });
 
             document.getElementById('btn-spin-1').addEventListener('click', () => triggerGacha(1));
             document.getElementById('btn-spin-10').addEventListener('click', () => triggerGacha(10));
@@ -4141,3 +4168,4 @@
     </script>
 </body>
 </html>
+
