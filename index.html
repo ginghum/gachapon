@@ -248,7 +248,11 @@
                             <button class="btn-rarity-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:text-white" data-filter="SR">SR</button>
                             <button class="btn-rarity-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:text-white" data-filter="SSR">SSR</button>
                             <button class="btn-rarity-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:text-white" data-filter="SEC">SEC</button>
-                            <button class="btn-rarity-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:text-white" data-filter="uncollected">未所持</button>
+                            <select id="ownership-select" aria-label="所持状況で絞り込み" class="bg-slate-950 border border-slate-700 text-slate-300 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-purple-500 font-bold cursor-pointer">
+                                <option value="all">すべて表示</option>
+                                <option value="owned">所持中のみ</option>
+                                <option value="uncollected">未所持のみ</option>
+                            </select>
                         </div>
                         <div class="text-[10px] text-slate-500 font-bold whitespace-nowrap">
                             <span id="filter-stats-txt">2000種類表示中</span>
@@ -2736,6 +2740,7 @@
         }
         // フィルタ用ステート
         let currentRarityFilter = 'all';
+        let currentOwnershipFilter = 'all';
         let currentCategoryFilter = 'all';
         let currentSearchQuery = '';
     </script>
@@ -2855,6 +2860,11 @@
                 renderCollection();
             });
             
+            document.getElementById('ownership-select').addEventListener('change', (e) => {
+                currentOwnershipFilter = e.target.value;
+                renderCollection();
+            });
+
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
                 searchInput.addEventListener('input', (e) => {
@@ -2955,13 +2965,11 @@
                 const isCollected = state.collected[item.id] > 0;
 
                 // レアリティフィルタ
-                if (currentRarityFilter !== 'all') {
-                    if (currentRarityFilter === 'uncollected') {
-                        if (isCollected) return;
-                    } else if (item.rarity !== currentRarityFilter) {
-                        return;
-                    }
-                }
+                if (currentRarityFilter !== 'all' && item.rarity !== currentRarityFilter) return;
+
+                // 所持状況はレアリティ・ジャンル・検索と併用可能
+                if (currentOwnershipFilter === 'owned' && !isCollected) return;
+                if (currentOwnershipFilter === 'uncollected' && isCollected) return;
                 
                 // ジャンルフィルタ
                 if (currentCategoryFilter !== 'all' && item.category !== currentCategoryFilter) {
@@ -3003,7 +3011,7 @@
             });
 
             // コンプリート特典を持っている場合は特別に末尾に追加
-            if (state.collected[2000] > 0 && currentRarityFilter === 'all' && currentCategoryFilter === 'all' && (!currentSearchQuery || (itemById.get(2000).name + ' ' + itemById.get(2000).desc).toLowerCase().includes(currentSearchQuery))) {
+            if (state.collected[2000] > 0 && currentOwnershipFilter !== 'uncollected' && currentRarityFilter === 'all' && currentCategoryFilter === 'all' && (!currentSearchQuery || (itemById.get(2000).name + ' ' + itemById.get(2000).desc).toLowerCase().includes(currentSearchQuery))) {
                 const compItem = gachaItems.find(i => i.id === 2000);
                 shownCount++;
                 const card = document.createElement('div');
@@ -3019,6 +3027,14 @@
                 grid.appendChild(card);
             }
 
+            if (shownCount === 0) {
+                const empty = document.createElement('p');
+                empty.className = "col-span-full py-10 text-center text-sm text-slate-400";
+                empty.textContent = currentOwnershipFilter === 'owned'
+                    ? '条件に合う所持アイテムがありません。'
+                    : '条件に合うアイテムがありません。';
+                grid.appendChild(empty);
+            }
             document.getElementById('filter-stats-txt').textContent = `${shownCount} 種類表示中`;
         }
 
