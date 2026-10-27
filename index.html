@@ -100,7 +100,7 @@
                     <h1 class="text-xl sm:text-2xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
                         無限！絶妙なミニキーホルダー
                     </h1>
-                    <p class="text-xs text-slate-400">全2000種にオリジナル図形イラスト！カオスをコンプせよ！</p>
+                    <p class="text-xs text-slate-400">全2300種にオリジナル図形イラスト！カオスをコンプせよ！</p>
                 </div>
             </div>
             
@@ -110,7 +110,7 @@
                 <div class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 w-full sm:w-64">
                     <div class="flex justify-between text-xs font-semibold mb-1">
                         <span class="text-purple-300"><i class="fa-solid fa-trophy mr-1 text-amber-400"></i>収集コンプ率</span>
-                        <span id="global-progress-txt">0% (0/2000)</span>
+                        <span id="global-progress-txt">0% (0/2300)</span>
                     </div>
                     <div class="w-full bg-slate-900 rounded-full h-2.5 overflow-hidden">
                         <div id="global-progress-bar" class="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-500" style="width: 0%"></div>
@@ -255,7 +255,7 @@
                             </select>
                         </div>
                         <div class="text-[10px] text-slate-500 font-bold whitespace-nowrap">
-                            <span id="filter-stats-txt">2000種類表示中</span>
+                            <span id="filter-stats-txt">2300種類表示中</span>
                         </div>
                     </div>
                     
@@ -297,7 +297,7 @@
                             </li>
                             <li class="flex justify-between border-b border-slate-800 pb-2">
                                 <span class="text-slate-400">獲得ユニーク種:</span>
-                                <span class="font-bold text-white" id="stat-unique-collected">0 / 2000 種</span>
+                                <span class="font-bold text-white" id="stat-unique-collected">0 / 2300 種</span>
                             </li>
                             <li class="flex justify-between border-b border-slate-800 pb-2">
                                 <span class="text-slate-400">総重複キーホルダー数:</span>
@@ -449,14 +449,14 @@
             <div class="absolute -inset-10 bg-gradient-to-tr from-yellow-500/20 to-amber-500/20 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
             
             <h2 class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 mb-2">CONGRATULATIONS!</h2>
-            <p class="text-sm sm:text-lg text-yellow-200 mb-8 font-bold">全2000種類の絶妙なキーホルダーをコンプリートしました！</p>
+            <p class="text-sm sm:text-lg text-yellow-200 mb-8 font-bold">全2300種類の絶妙なキーホルダーをコンプリートしました！</p>
             
             <div id="complete-visual-box" class="h-48 flex items-center justify-center mb-6 relative keychain-swing">
                 <!-- コンプアイテムを入れる -->
             </div>
             
-            <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">2000種集めても人生は変わらない真実</h3>
-            <p class="text-xs sm:text-sm text-slate-300 mb-8 leading-relaxed max-w-md font-semibold">この2000個のガラクタを集めるために費やした時間と情熱。しかし、あなたの人生の価値はこんなものでは揺るがないという究極の悟り。コンプリートおめでとうございます！</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">2300種集めても人生は変わらない真実</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mb-8 leading-relaxed max-w-md font-semibold">この2300個のガラクタを集めるために費やした時間と情熱。しかし、あなたの人生の価値はこんなものでは揺るがないという究極の悟り。コンプリートおめでとうございます！</p>
             
             <button id="btn-complete-close" class="px-10 py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-slate-900 font-black rounded-xl shadow-lg active:scale-95 transition text-md sm:text-lg">
                 真実を受け入れる
@@ -598,7 +598,7 @@
 
     <script>
         /*
-         * キーホルダー 全2000種類 (+コンプ特典) 完全オリジナルデータリスト
+         * キーホルダー 全2300種類 (+コンプ特典) 完全オリジナルデータリスト
          */
         const gachaItems = [
             // 謎の生物 (1-21)
@@ -2668,8 +2668,310 @@
             {"id": 2499, "name": "言い訳監査士の指摘事項", "rarity": "SSR", "emoji": "📜", "color": "#fbbf24", "category": "架空の資格試験", "desc": "「あとでやる」の根拠資料を求める。監査報告書はあとで書く予定。"},
             {"id": 2500, "name": "資格を発行する資格", "rarity": "SEC", "emoji": "📜", "color": "#ec4899", "category": "架空の資格試験", "desc": "あらゆる試験の頂点にある免許。ただし更新には別の資格が必要。"},
 
+            // 2300種増補：11ジャンル、300種。各ジャンルSEC一種。
+            {"id":2501,"name":"四曜日","desc":"水曜と木曜の間に入る予定だった。誰も働きたがらなかった。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2502,"name":"バナナの骨","desc":"食べにくいという意見が多数を占めた。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2503,"name":"人間の予備ネジ","desc":"余っていても普通に生活できるため、廃止された。","rarity":"SR","emoji":"📋","color":"#c084fc","category":"世界の没案"},
+            {"id":2504,"name":"夕焼けの青色版","desc":"綺麗だったが、帰る時間だと誰も気づかなかった。","rarity":"SSR","emoji":"📋","color":"#fbbf24","category":"世界の没案"},
+            {"id":2505,"name":"月の電池蓋","desc":"満月のたびに交換する運用には無理があった。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2506,"name":"雨の一時停止ボタン","desc":"誰が押すかでもめて、結局ずっと降っていた。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2507,"name":"海の栓","desc":"抜いたあとの水の行き先が決まらなかった。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2508,"name":"左右兼用の右手","desc":"握手のときだけ、少し混乱した。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2509,"name":"春の延長コード","desc":"冬まで届いたが、秋の評判が悪かった。","rarity":"SR","emoji":"📋","color":"#c084fc","category":"世界の没案"},
+            {"id":2510,"name":"鳥の着陸灯","desc":"夜は便利だった。昼は本人も消し忘れた。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2511,"name":"空の折り目","desc":"引っ越すときに畳める予定だった。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2512,"name":"影の充電器","desc":"晴れた日に使うと、かえって暗くなった。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2513,"name":"地球の持ち手","desc":"運ぶ人を採用できずに終わった。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2514,"name":"虹の八色目","desc":"七色に戻しても、誰も気づかなかった。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2515,"name":"眠気の残量表示","desc":"数字を見ているうちに寝てしまった。","rarity":"SSR","emoji":"📋","color":"#fbbf24","category":"世界の没案"},
+            {"id":2516,"name":"雪の温かい版","desc":"届く前にお湯になっていた。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2517,"name":"夢のレシート","desc":"覚えていない買い物の請求が来た。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2518,"name":"風の矢印","desc":"景色がうるさいという理由で却下された。","rarity":"SR","emoji":"📋","color":"#c084fc","category":"世界の没案"},
+            {"id":2519,"name":"重力のお試し期間","desc":"期限が切れた人が戻ってこなかった。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2520,"name":"昨日の再配達票","desc":"受け取るには、昨日の在宅が必要だった。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2521,"name":"海底の天窓","desc":"海側の住民から苦情が出た。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2522,"name":"笑い声の字幕","desc":"笑っていない人まで内容を確認できてしまう。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2523,"name":"太陽の調光つまみ","desc":"夏休み中ずっと、誰かが最大にしていた。","rarity":"SR","emoji":"📋","color":"#c084fc","category":"世界の没案"},
+            {"id":2524,"name":"命の取り消し線","desc":"消したあとに何を書けばいいのか決まらなかった。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2525,"name":"地球の取扱説明書","desc":"責任の所在が明確になってしまうので、同梱されなかった。","rarity":"SSR","emoji":"📋","color":"#fbbf24","category":"世界の没案"},
+            {"id":2526,"name":"世界の保存ボタン","desc":"押す直前の状態しか残せなかった。","rarity":"R","emoji":"📋","color":"#38bdf8","category":"世界の没案"},
+            {"id":2527,"name":"明日の試作品","desc":"予定より出来がよく、正式版への苦情が止まらない。","rarity":"C","emoji":"📋","color":"#94a3b8","category":"世界の没案"},
+            {"id":2528,"name":"あなたの不採用案","desc":"今のあなたより、少しだけ幸せそうに見える。","rarity":"SEC","emoji":"📋","color":"#ec4899","category":"世界の没案"},
+            {"id":2529,"name":"帰り道で思いついた反論","desc":"相手はもう、夕飯のことを考えている。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2530,"name":"褒められる予定だった努力","desc":"見える場所に置くのを忘れていた。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2531,"name":"もう怒っていないふり","desc":"表面だけ、きれいに乾いている。","rarity":"SR","emoji":"❤️","color":"#c084fc","category":"感情の落とし物"},
+            {"id":2532,"name":"送らなかったおめでとう","desc":"少しだけ、悔しさの重みがある。","rarity":"SSR","emoji":"❤️","color":"#fbbf24","category":"感情の落とし物"},
+            {"id":2533,"name":"笑う順番を逃した冗談","desc":"今さら笑うには、説明が必要になった。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2534,"name":"名前を呼ばれた気がした期待","desc":"振り返った回数だけ角が丸くなった。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2535,"name":"言い直せなかった一言","desc":"頭の中では、もう何度も上手に言えている。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2536,"name":"相槌だけの賛成","desc":"持ち帰ってから、違うと思い始めた。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2537,"name":"負けたあとに整えた前髪","desc":"気にしていない顔を作るための最後の作業。","rarity":"SR","emoji":"❤️","color":"#c084fc","category":"感情の落とし物"},
+            {"id":2538,"name":"既読を待つ間の自信","desc":"一分ごとに少しずつ縮む。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2539,"name":"久しぶりに会う前の練習","desc":"本番では「おう」しか出なかった。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2540,"name":"平気と言った直後の息","desc":"誰もいないところまで、よく持ちこたえた。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2541,"name":"置いていかれた強がり","desc":"本人より長く、その場に立っていた。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2542,"name":"一人分だけ余った楽しみ","desc":"誘う言葉と一緒に袋へしまった。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2543,"name":"拍手に混ぜた嫉妬","desc":"音だけ聞けば、誰にも分からない。","rarity":"SSR","emoji":"❤️","color":"#fbbf24","category":"感情の落とし物"},
+            {"id":2544,"name":"思い出すたび上手くなる返事","desc":"実際に言った返事だけは変わらない。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2545,"name":"知らないふりした親切","desc":"お礼を言われるところまで想像していた。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2546,"name":"寝る前だけの決意","desc":"朝日を当てると透明になる。","rarity":"SR","emoji":"❤️","color":"#c084fc","category":"感情の落とし物"},
+            {"id":2547,"name":"失敗した人への少しの安堵","desc":"すぐにしまったので、誰にも見られていない。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2548,"name":"忘れたことにした約束","desc":"日時だけ、やけにはっきり覚えている。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2549,"name":"自分だけ覚えている記念日","desc":"カレンダーに書くほどでもない、と毎年思う。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2550,"name":"羨ましくないと言った夢","desc":"触ると、まだ温かい。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2551,"name":"誰かに見せたかった景色","desc":"写真には、その人の分の空白がある。","rarity":"SR","emoji":"❤️","color":"#c084fc","category":"感情の落とし物"},
+            {"id":2552,"name":"届いた頃には要らない励まし","desc":"それでも捨てられず、引き出しにある。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2553,"name":"初めて諦めたときの静けさ","desc":"泣くと思っていたので、自分でも驚いた。","rarity":"SSR","emoji":"❤️","color":"#fbbf24","category":"感情の落とし物"},
+            {"id":2554,"name":"最後に呼ぶつもりだった名前","desc":"口の形だけが残っている。","rarity":"R","emoji":"❤️","color":"#38bdf8","category":"感情の落とし物"},
+            {"id":2555,"name":"幸福だったことにした一日","desc":"悪くなかった場面を、丁寧につなぎ合わせた。","rarity":"C","emoji":"❤️","color":"#94a3b8","category":"感情の落とし物"},
+            {"id":2556,"name":"あなたを待つ嬉しさ","desc":"誰が落としたのか分からない。あなたの足音にだけ反応する。","rarity":"SEC","emoji":"❤️","color":"#ec4899","category":"感情の落とし物"},
+            {"id":2557,"name":"世界征服後の有給申請","desc":"達成まで休めない規定には、誰も納得していない。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2558,"name":"怪人用の社員証","desc":"変身後の写真しかなく、通勤時に止められる。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2559,"name":"敗北手当","desc":"爆発から歩いて帰るための交通費を含む。","rarity":"SR","emoji":"👾","color":"#c084fc","category":"悪の組織の福利厚生"},
+            {"id":2560,"name":"戦闘員の健康診断","desc":"毎年「よく生きていますね」と言われる。","rarity":"SSR","emoji":"👾","color":"#fbbf24","category":"悪の組織の福利厚生"},
+            {"id":2561,"name":"秘密基地の通勤定期","desc":"改札で基地の所在地を大声で読み上げる。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2562,"name":"覆面越しの社員食堂","desc":"麺類だけは、みんな黙って素顔を出す。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2563,"name":"洗脳解除休暇","desc":"自分の意思で休んでいるか、毎朝確認が入る。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2564,"name":"爆発対応の作業着","desc":"洗濯すると、また明日の分が支給される。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2565,"name":"幹部専用の肩こり券","desc":"悪だくみ中の姿勢が原因らしい。","rarity":"SR","emoji":"👾","color":"#c084fc","category":"悪の組織の福利厚生"},
+            {"id":2566,"name":"地下基地の住宅手当","desc":"日当たりの項目は申請書から削除された。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2567,"name":"改造費の分割払い","desc":"退職後も月々の引き落としは続く。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2568,"name":"悪の親睦会の名札","desc":"「気軽に本名を」と書かれている。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2569,"name":"必殺技の練習補助金","desc":"成功した証拠映像を撮る係が辞めた。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2570,"name":"復活待ち整理券","desc":"順番が来たら、棺のベルが鳴る。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2571,"name":"人質役の振替休日","desc":"救出シーンの撮り直しで、また潰れた。","rarity":"SSR","emoji":"👾","color":"#fbbf24","category":"悪の組織の福利厚生"},
+            {"id":2572,"name":"怪獣の託児所","desc":"迎えに来る親も、だいたい大きい。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2573,"name":"裏切り防止の持株制度","desc":"正義側の買収提案で社内が揺れている。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2574,"name":"基地自爆後の見舞金","desc":"申請窓口も一緒に吹き飛んだ。","rarity":"SR","emoji":"👾","color":"#c084fc","category":"悪の組織の福利厚生"},
+            {"id":2575,"name":"正義の味方対応マニュアル","desc":"名乗りの最中は、電話を保留にする。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2576,"name":"侵略先の出張土産","desc":"占領前なので、ちゃんと代金を払った。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2577,"name":"ボスの代わりの謝罪文","desc":"「部下が勝手に」が定型句になっている。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2578,"name":"世界地図の達成率シール","desc":"まだ自分の家にしか貼れていない。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2579,"name":"戦闘員の退職祝い","desc":"花束のリボンにも、組織名を出せない。","rarity":"SR","emoji":"👾","color":"#c084fc","category":"悪の組織の福利厚生"},
+            {"id":2580,"name":"悪の組織の労働組合","desc":"最初に要求したのは、床の穴を塞ぐこと。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2581,"name":"倒された幹部の再雇用契約","desc":"以前と同じ席に、少し小さい椅子がある。","rarity":"SSR","emoji":"👾","color":"#fbbf24","category":"悪の組織の福利厚生"},
+            {"id":2582,"name":"最終決戦の残業弁当","desc":"ヒーロー側の分もまとめて届いた。","rarity":"R","emoji":"👾","color":"#38bdf8","category":"悪の組織の福利厚生"},
+            {"id":2583,"name":"永遠の平社員表彰","desc":"組織が滅びても、勤続年数だけは増え続ける。","rarity":"C","emoji":"👾","color":"#94a3b8","category":"悪の組織の福利厚生"},
+            {"id":2584,"name":"世界平和後の雇用保証","desc":"敵がいなくなっても、あなたの席は残してある。","rarity":"SEC","emoji":"👾","color":"#ec4899","category":"悪の組織の福利厚生"},
+            {"id":2585,"name":"選ばれなかった聖剣","desc":"台座の前だけ、いつも素通りされる。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2586,"name":"伏線になれなかった傷","desc":"怪我をした理由は、本当にただの転倒だった。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2587,"name":"誰も裏切らなかった晩餐","desc":"毒見役だけが、最後まで緊張していた。","rarity":"SR","emoji":"📖","color":"#c084fc","category":"物語に出なかった物"},
+            {"id":2588,"name":"扉絵だけのライバル","desc":"毎週、知らない人たちと並んでいる。","rarity":"SSR","emoji":"📖","color":"#fbbf24","category":"物語に出なかった物"},
+            {"id":2589,"name":"出番を待つ三つ目の鍵","desc":"扉は二枚しかなかった。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2590,"name":"回想に映らない幼馴染","desc":"写真を撮った側なので、どこにも写っていない。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2591,"name":"早すぎた最終兵器","desc":"第一話で解決するので、地下へ戻された。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2592,"name":"予告でしか燃えない城","desc":"本編では、防火対策が間に合った。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2593,"name":"名前のない必殺技","desc":"叫ぶ前に戦いが終わってしまう。","rarity":"SR","emoji":"📖","color":"#c084fc","category":"物語に出なかった物"},
+            {"id":2594,"name":"主人公の隣の席","desc":"席替えの回自体がなくなった。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2595,"name":"ただ古いだけの石碑","desc":"調べても、地域の寄付者名しか出てこない。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2596,"name":"普通に開く封印の扉","desc":"押すと書いてある。引く必要もない。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2597,"name":"拾われなかった日記","desc":"重要なことは後半に書いてあるのに。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2598,"name":"真相を知る通行人","desc":"誰にも聞かれず、そのまま帰った。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2599,"name":"登場人物表の空欄","desc":"もう、誰を入れる予定だったかも分からない。","rarity":"SSR","emoji":"📖","color":"#fbbf24","category":"物語に出なかった物"},
+            {"id":2600,"name":"和解が先に済んだ決闘場","desc":"観客は事情を知らず、ずっと待っている。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2601,"name":"夢で終わらなかった夢","desc":"起きたあとも、別の場所で続いている。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2602,"name":"説明されなかった眼帯","desc":"本人は、いつ聞いてくれてもよかった。","rarity":"SR","emoji":"📖","color":"#c084fc","category":"物語に出なかった物"},
+            {"id":2603,"name":"助かった脇役の後日談","desc":"あのあと、地元で店を始めた。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2604,"name":"読み飛ばされた一行","desc":"一生分の出来事が書いてあった。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2605,"name":"ラスボスの買い物メモ","desc":"決戦の前に、卵を買う予定だった。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2606,"name":"旅立たなかった朝の弁当","desc":"昼には家で、普通に食べた。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2607,"name":"挿入されない主題歌","desc":"一番盛り上がるところで、毎回会話が始まる。","rarity":"SR","emoji":"📖","color":"#c084fc","category":"物語に出なかった物"},
+            {"id":2608,"name":"終章の向こうの小さな店","desc":"そこまで歩いた人物が、まだいない。","rarity":"C","emoji":"📖","color":"#94a3b8","category":"物語に出なかった物"},
+            {"id":2609,"name":"誰も死ななかった墓標","desc":"作ってしまったので、庭石にした。","rarity":"SSR","emoji":"📖","color":"#fbbf24","category":"物語に出なかった物"},
+            {"id":2610,"name":"最後まで普通だった隣人","desc":"秘密がないことだけが、最後まで疑われた。","rarity":"R","emoji":"📖","color":"#38bdf8","category":"物語に出なかった物"},
+            {"id":2611,"name":"読者が閉じたあとの部屋","desc":"登場人物は、まだそこで話している。","rarity":"SEC","emoji":"📖","color":"#ec4899","category":"物語に出なかった物"},
+            {"id":2612,"name":"最後の一粒なのに落とした米","desc":"箸の先には、もう何も残っていない。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2613,"name":"充電1％の電子チケット","desc":"係員の前で、一番暗い画面になった。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2614,"name":"洗った直後に見つかる皿","desc":"泡を流し切ってから、こちらを見ていた。","rarity":"SR","emoji":"🕳️","color":"#c084fc","category":"小さすぎる終末"},
+            {"id":2615,"name":"くしゃみで飛んだパズル一片","desc":"完成まであと一つだった、と床に説明している。","rarity":"SSR","emoji":"🕳️","color":"#fbbf24","category":"小さすぎる終末"},
+            {"id":2616,"name":"閉まる直前のエレベーター","desc":"目は合った。ボタンを押したかは分からない。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2617,"name":"レジ直前の財布忘れ","desc":"カゴの中身だけが、今日のやる気を知っている。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2618,"name":"布団に入ってからの消し忘れ","desc":"部屋の隅が、まだ明るい。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2619,"name":"袖口に入った洗顔の水","desc":"一日が始まる前から負けた気がする。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2620,"name":"録画終了一秒前の電池切れ","desc":"最後の一言が、一番面白かった。","rarity":"SR","emoji":"🕳️","color":"#c084fc","category":"小さすぎる終末"},
+            {"id":2621,"name":"左右揃わない新品の靴下","desc":"包装の中では仲がよさそうだった。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2622,"name":"乗り過ごした一駅の長さ","desc":"降りるはずだった駅で、電車が急行になった。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2623,"name":"傘を開いた瞬間の晴れ間","desc":"まだ十分、手は濡れている。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2624,"name":"ひっくり返した最後のプリン","desc":"蓋には、きれいに剥がせると書いてあった。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2625,"name":"送信後に気づく誤字","desc":"訂正するには、少し恥ずかしい単語だった。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2626,"name":"一口目で落ちた具","desc":"最後まで大切に食べるつもりだった。","rarity":"SSR","emoji":"🕳️","color":"#fbbf24","category":"小さすぎる終末"},
+            {"id":2627,"name":"保存直前の再起動","desc":"更新の完了だけを、明るく知らせてくる。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2628,"name":"切りすぎた前髪の一束","desc":"戻し方だけが検索に出てこない。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2629,"name":"休日に鳴った目覚まし","desc":"起きなくていいと分かった頃には、目が冴えた。","rarity":"SR","emoji":"🕳️","color":"#c084fc","category":"小さすぎる終末"},
+            {"id":2630,"name":"改札の向こうの忘れ物","desc":"取りに戻るには、もう一度説明がいる。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2631,"name":"開封直後に破れた袋","desc":"保存用のチャックだけ、無事だった。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2632,"name":"温め忘れた弁当の帰宅","desc":"もう靴も脱いだ。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2633,"name":"自分だけ知らない集合場所","desc":"みんなの写真では、すでに楽しそうだった。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2634,"name":"畳み終わった服に座る猫","desc":"起こすほどではないので、しばらく終わらない。","rarity":"SR","emoji":"🕳️","color":"#c084fc","category":"小さすぎる終末"},
+            {"id":2635,"name":"一日違いの割引券","desc":"昨日なら得をしていた、と今日分かった。","rarity":"C","emoji":"🕳️","color":"#94a3b8","category":"小さすぎる終末"},
+            {"id":2636,"name":"結末だけ聞こえた映画","desc":"予告だと思って耳を貸した。","rarity":"SSR","emoji":"🕳️","color":"#fbbf24","category":"小さすぎる終末"},
+            {"id":2637,"name":"空振りした握手の手","desc":"今から髪を直すには、位置が低すぎる。","rarity":"R","emoji":"🕳️","color":"#38bdf8","category":"小さすぎる終末"},
+            {"id":2638,"name":"誰にも伝わらなかった今日","desc":"確かにあった一日なのに、話すことが一つもない。","rarity":"SEC","emoji":"🕳️","color":"#ec4899","category":"小さすぎる終末"},
+            {"id":2639,"name":"夕日を押して帰る人","desc":"冬は早く帰れるので、この仕事が好き。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2640,"name":"国境を一歩ずつ動かす人","desc":"隣国の担当者とは仲がいい。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2641,"name":"王様の影武者の影武者","desc":"まだ一度も呼ばれていない。","rarity":"SR","emoji":"👋","color":"#c084fc","category":"世界の人々"},
+            {"id":2642,"name":"雲のほつれを縫う人","desc":"雨の日は、少し仕事が雑だった日。","rarity":"SSR","emoji":"👋","color":"#fbbf24","category":"世界の人々"},
+            {"id":2643,"name":"夜の長さを測る人","desc":"寝てしまった分は、推定値を記入する。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2644,"name":"海の塩加減を見る人","desc":"毎朝ひと口だけ、昨日と比べる。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2645,"name":"山の背を褒める人","desc":"たまに少し高くなったような気がする。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2646,"name":"島の順番を並べ直す人","desc":"観光地図が売れた日にだけ忙しい。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2647,"name":"地図の端を支える人","desc":"ここから先へ行く人には、挨拶をする。","rarity":"SR","emoji":"👋","color":"#c084fc","category":"世界の人々"},
+            {"id":2648,"name":"霧の向こうで道を教える人","desc":"本人にも、こちらの姿は見えていない。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2649,"name":"朝を配達する人","desc":"寝坊した家には、二回ベルを鳴らす。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2650,"name":"風向きで髪を分ける人","desc":"転勤が多い土地なので、床屋は困っている。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2651,"name":"虹の通行料を集める人","desc":"小銭を受け取るたび、橋が少し透ける。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2652,"name":"地平線に椅子を並べる人","desc":"誰が来るかは、当日まで知らされない。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2653,"name":"砂漠の波打ち際を探す人","desc":"靴を脱ぐ場所だけ、先に決めてある。","rarity":"SSR","emoji":"👋","color":"#fbbf24","category":"世界の人々"},
+            {"id":2654,"name":"隣町の名前を考える人","desc":"自分の町の名前は、誰かが決めた。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2655,"name":"空席にお茶を出す人","desc":"冷める前に、毎回誰かが飲んでいる。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2656,"name":"川の曲がり角の番人","desc":"流れを止める権限はない。","rarity":"SR","emoji":"👋","color":"#c084fc","category":"世界の人々"},
+            {"id":2657,"name":"季節の引越し業者","desc":"春の荷物には、割れ物が多い。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2658,"name":"月影を借りて暮らす人","desc":"満月の晩だけ、部屋が広くなる。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2659,"name":"誰もいない港の船長","desc":"出航の合図だけは、毎日欠かさない。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2660,"name":"明日の迷子を迎える人","desc":"名前より先に、泣き顔を覚えている。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2661,"name":"星の配置を忘れた職人","desc":"昨夜と違っても、大抵は気づかれない。","rarity":"SR","emoji":"👋","color":"#c084fc","category":"世界の人々"},
+            {"id":2662,"name":"国中の鍵を閉める人","desc":"最後の一本だけ、自分の家の鍵ではない。","rarity":"C","emoji":"👋","color":"#94a3b8","category":"世界の人々"},
+            {"id":2663,"name":"春に帰ってこない旅人","desc":"出発した日には、来年と言っていた。","rarity":"SSR","emoji":"👋","color":"#fbbf24","category":"世界の人々"},
+            {"id":2664,"name":"世界を一周して通勤する人","desc":"逆へ歩けば近いことは、知っている。","rarity":"R","emoji":"👋","color":"#38bdf8","category":"世界の人々"},
+            {"id":2665,"name":"あなたを覚えている人","desc":"あなたは、この人を知らない。","rarity":"SEC","emoji":"👋","color":"#ec4899","category":"世界の人々"},
+            {"id":2666,"name":"花粉症のミツバチ","desc":"仕事への意欲はある。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2667,"name":"尻尾を切ると本体もついてくるトカゲ","desc":"本人は逃げ切ったつもり。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2668,"name":"威嚇すると腹が鳴るライオン","desc":"相手にも事情が伝わってしまう。","rarity":"SR","emoji":"🐛","color":"#c084fc","category":"残念すぎる生物"},
+            {"id":2669,"name":"水を怖がるカッパ","desc":"皿には、霧吹きを使っている。","rarity":"SSR","emoji":"🐛","color":"#fbbf24","category":"残念すぎる生物"},
+            {"id":2670,"name":"擬態先を忘れたナナフシ","desc":"今日は、何かの棒として頑張っている。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2671,"name":"飛ぶと酔うハト","desc":"歩いて帰るので、帰巣には時間がかかる。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2672,"name":"殻の内側が狭いカタツムリ","desc":"入るには、荷物を外へ置かなければならない。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2673,"name":"眠ると光るホタル","desc":"夜になると、仲間に起こされる。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2674,"name":"群れの連絡を見ないイワシ","desc":"今日も一匹だけ、逆向きに泳ぐ。","rarity":"SR","emoji":"🐛","color":"#c084fc","category":"残念すぎる生物"},
+            {"id":2675,"name":"逆さになると落ち着かないコウモリ","desc":"止まる場所を、まだ決められない。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2676,"name":"墨が薄いイカ","desc":"逃げた方向が、うっすら見えている。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2677,"name":"褒めると膨らむフグ","desc":"褒められたいが、帰り道が通れなくなる。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2678,"name":"冬眠の予約を忘れたクマ","desc":"起きている店を探して、冬を越す。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2679,"name":"首を寝違えたキリン","desc":"何があったのか聞かれる範囲が広い。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2680,"name":"暗いところが苦手なモグラ","desc":"穴の中に、照明を持ち込んだ。","rarity":"SSR","emoji":"🐛","color":"#fbbf24","category":"残念すぎる生物"},
+            {"id":2681,"name":"糸がほどけるクモ","desc":"獲物より先に、本人が落ちる。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2682,"name":"二度見するカメレオン","desc":"背景の色を確認している間に移動される。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2683,"name":"噛み合わせの悪いワニ","desc":"口を閉じたあとに、少し首を傾げる。","rarity":"SR","emoji":"🐛","color":"#c084fc","category":"残念すぎる生物"},
+            {"id":2684,"name":"枝を選びすぎるナマケモノ","desc":"引っ越し候補を見始めて、もう三年。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2685,"name":"目立ちたがりの透明魚","desc":"発見されるまで、目の前を往復する。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2686,"name":"自分の角が怖いシカ","desc":"水面を見たあとだけ、大人しくなる。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2687,"name":"泳いだ距離を忘れる回遊魚","desc":"とりあえず、見覚えのある海へ向かう。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2688,"name":"羽の模様に飽きたチョウ","desc":"裏側を見せる飛び方を練習している。","rarity":"SR","emoji":"🐛","color":"#c084fc","category":"残念すぎる生物"},
+            {"id":2689,"name":"反芻の感想が長いウシ","desc":"草一本で、午後が終わった。","rarity":"C","emoji":"🐛","color":"#94a3b8","category":"残念すぎる生物"},
+            {"id":2690,"name":"不死身なのに休みたいクラゲ","desc":"終わりがないことの不便さを知っている。","rarity":"SSR","emoji":"🐛","color":"#fbbf24","category":"残念すぎる生物"},
+            {"id":2691,"name":"進化の途中で満足した生物","desc":"ここでもう十分、と三本目の足をしまった。","rarity":"R","emoji":"🐛","color":"#38bdf8","category":"残念すぎる生物"},
+            {"id":2692,"name":"絶滅が下手な生物","desc":"最後の一匹になってから、三億年が経った。","rarity":"SEC","emoji":"🐛","color":"#ec4899","category":"残念すぎる生物"},
+            {"id":2693,"name":"村長を見失う祭り","desc":"見つかるまで副村長が村長を務める。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2694,"name":"全員遅刻の開会式","desc":"時間通りに来ると、準備を手伝わされる。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2695,"name":"去年の餅を褒める会","desc":"今年の餅については、まだ何も言えない。","rarity":"SR","emoji":"🚩","color":"#c084fc","category":"珍行事"},
+            {"id":2696,"name":"川の上流へお礼を言う日","desc":"下流の町から、同じ言葉が届く。","rarity":"SSR","emoji":"🚩","color":"#fbbf24","category":"珍行事"},
+            {"id":2697,"name":"扉を一斉に開ける夜","desc":"風が通り抜けるまで、誰も閉めてはいけない。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2698,"name":"知らない親戚の歓迎会","desc":"主催者も、誰の親戚なのか確認していない。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2699,"name":"最も静かな人の表彰式","desc":"呼ばれても返事をしないので、毎年長引く。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2700,"name":"去年の雪だるまの法要","desc":"遺影には、まだ元気な頃の三段姿。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2701,"name":"町内一周の引越し","desc":"最後は、元の家に家具を戻す。","rarity":"SR","emoji":"🚩","color":"#c084fc","category":"珍行事"},
+            {"id":2702,"name":"笑ってはいけない盆踊り","desc":"振り付けの由来を聞くと、失格になる。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2703,"name":"空の弁当箱交換会","desc":"昨日の献立の匂いだけで勝負する。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2704,"name":"寝坊した太陽への苦情祭","desc":"曇りでも、担当者は呼び出される。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2705,"name":"地図にない場所の清掃日","desc":"集合場所が分かった人から始める。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2706,"name":"一番遠い席の譲り合い","desc":"誰も座らないまま、お開きになる。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2707,"name":"村中で同じ嘘をつく日","desc":"翌日には、本当だった部分を申告する。","rarity":"SSR","emoji":"🚩","color":"#fbbf24","category":"珍行事"},
+            {"id":2708,"name":"閉会式だけの運動会","desc":"怪我人が出ないので、長く続いている。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2709,"name":"壊れていない橋の渡り初め","desc":"去年も無事に渡れたことを祝う。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2710,"name":"知らない歌の合唱祭","desc":"指揮者が一番、不安そうな顔をしている。","rarity":"SR","emoji":"🚩","color":"#c084fc","category":"珍行事"},
+            {"id":2711,"name":"新しい石の歓迎儀式","desc":"村で一番古い石の隣へ案内する。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2712,"name":"海に背を向ける花火大会","desc":"音を一番楽しめる位置で見る。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2713,"name":"全員主役の村芝居","desc":"脇役が足りず、開演できていない。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2714,"name":"忘れ物をしに行く遠足","desc":"帰りの点呼では、荷物の少なさを競う。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2715,"name":"来年の反省会","desc":"失敗の予定だけが、着々と決まる。","rarity":"SR","emoji":"🚩","color":"#c084fc","category":"珍行事"},
+            {"id":2716,"name":"祭りの由来を決める祭り","desc":"今年も諸説ある、でまとまった。","rarity":"C","emoji":"🚩","color":"#94a3b8","category":"珍行事"},
+            {"id":2717,"name":"百年目の初開催","desc":"延期を重ねた実行委員会に、孫の孫が集まった。","rarity":"SSR","emoji":"🚩","color":"#fbbf24","category":"珍行事"},
+            {"id":2718,"name":"一人も帰らないお見送り","desc":"誰を送るのか、最後まで決まらなかった。","rarity":"R","emoji":"🚩","color":"#38bdf8","category":"珍行事"},
+            {"id":2719,"name":"誰も知らない建国記念日","desc":"毎年、どこからか祝いの花が届く。","rarity":"SEC","emoji":"🚩","color":"#ec4899","category":"珍行事"},
+            {"id":2720,"name":"全室角部屋のマンション","desc":"廊下が複雑すぎて、配達員が住み始めた。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2721,"name":"毎朝新築になる家","desc":"午前六時に、家具ごと更地になる。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2722,"name":"徒歩十五分の玄関","desc":"駅からではなく、寝室から。","rarity":"SR","emoji":"🏠","color":"#c084fc","category":"住みたくない建築物"},
+            {"id":2723,"name":"隣室と交代制の風呂","desc":"壁ごと回ってくるので、音が大きい。","rarity":"SSR","emoji":"🏠","color":"#fbbf24","category":"住みたくない建築物"},
+            {"id":2724,"name":"絶対に日が当たる寝室","desc":"夜も少しだけ、天井がまぶしい。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2725,"name":"廊下だけ床暖房の豪邸","desc":"冬は、家族が廊下に集まる。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2726,"name":"開くたび違う階の窓","desc":"洗濯物を出した階を覚えておく必要がある。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2727,"name":"全階一階の集合住宅","desc":"住所に何と書いても、管理人が困る。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2728,"name":"最寄駅を追いかける家","desc":"朝のラッシュ時は、少し速く走る。","rarity":"SR","emoji":"🏠","color":"#c084fc","category":"住みたくない建築物"},
+            {"id":2729,"name":"呼び鈴と会話する門","desc":"用件を伝えると、まず感想を言われる。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2730,"name":"帰ると広くなる家","desc":"外出中に畳まれた家具は、自分で直す。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2731,"name":"階段しかない平屋","desc":"歩数は稼げる。部屋は増えない。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2732,"name":"収納される住人の部屋","desc":"散らかすと、まとめて棚に入れられる。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2733,"name":"全方位南向きの住宅","desc":"方位磁針を持ち込むと、管理会社に怒られる。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2734,"name":"隣の物音を増幅する壁","desc":"住人同士の仲だけは、よく分かる。","rarity":"SSR","emoji":"🏠","color":"#fbbf24","category":"住みたくない建築物"},
+            {"id":2735,"name":"屋根より高い浴槽","desc":"風呂上がりに、近所へ挨拶する必要がある。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2736,"name":"来客を数える床板","desc":"帰った人数が少ないと、朝まで鳴く。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2737,"name":"家具が先住民の家","desc":"椅子に座るにも、話し合いがいる。","rarity":"SR","emoji":"🏠","color":"#c084fc","category":"住みたくない建築物"},
+            {"id":2738,"name":"鍵をかけると外になる家","desc":"防犯性能だけは、評価されている。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2739,"name":"見学者が途切れないモデルハウス","desc":"洗面所で歯を磨くと、暮らしの実演になる。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2740,"name":"部屋ごと大家の違う家","desc":"台所から寝室への移動で、契約が変わる。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2741,"name":"築年数が毎日若返る屋敷","desc":"来月には、建つ前に戻るらしい。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2742,"name":"別棟にある家の中心","desc":"どこへ行くにも、一度外へ出る。","rarity":"SR","emoji":"🏠","color":"#c084fc","category":"住みたくない建築物"},
+            {"id":2743,"name":"住人を選ぶオートロック","desc":"今朝は、もう少し頑張れと言われた。","rarity":"C","emoji":"🏠","color":"#94a3b8","category":"住みたくない建築物"},
+            {"id":2744,"name":"空室の気配がする満室","desc":"夜だけ、隣の部屋に募集の紙が出る。","rarity":"SSR","emoji":"🏠","color":"#fbbf24","category":"住みたくない建築物"},
+            {"id":2745,"name":"帰宅を先取りする玄関","desc":"内側から、自分の声でおかえりと言われる。","rarity":"R","emoji":"🏠","color":"#38bdf8","category":"住みたくない建築物"},
+            {"id":2746,"name":"実家の完全上位互換","desc":"家族もいる。あなたより出来のいいあなたもいる。","rarity":"SEC","emoji":"🏠","color":"#ec4899","category":"住みたくない建築物"},
+            {"id":2747,"name":"ゴールを背負うキーパー","desc":"どこに逃げてもシュートが来る。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2748,"name":"助走だけ世界新記録","desc":"踏み切る頃には競技場を出ていた。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2749,"name":"表彰台からのスタート","desc":"あとは順位を守るだけ。","rarity":"SR","emoji":"⚽","color":"#c084fc","category":"スポーツの裏技"},
+            {"id":2750,"name":"投球前のホームラン宣言書","desc":"打ったあとに書き込める余白がある。","rarity":"SSR","emoji":"⚽","color":"#fbbf24","category":"スポーツの裏技"},
+            {"id":2751,"name":"コースを覚えるだけの水泳","desc":"着替えずに会場へ来た。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2752,"name":"相手より長い入場曲","desc":"試合開始前に、観客が疲れている。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2753,"name":"追い風に予約を入れる","desc":"決勝の日だけ、予約がいっぱいだった。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2754,"name":"自分で数える滞空時間","desc":"着地してからも、まだ数えている。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2755,"name":"ファウルラインの持ち帰り","desc":"線がなければ判定できない、という主張。","rarity":"SR","emoji":"⚽","color":"#c084fc","category":"スポーツの裏技"},
+            {"id":2756,"name":"空振りの音量強化","desc":"観客だけは、当たったと思っている。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2757,"name":"監督を二人に増やす","desc":"指示を聞き分ける競技が始まった。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2758,"name":"先に旗を持つ審判への挨拶","desc":"好印象と得点は、別の話だった。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2759,"name":"トラックを内側から押す","desc":"距離が縮む前に、整備員に止められた。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2760,"name":"ボールの帰巣本能","desc":"パスしても、すぐ自分の所へ戻る。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2761,"name":"審判に見えないほど遅い反則","desc":"気づいた頃には、昨日の試合になっていた。","rarity":"SSR","emoji":"⚽","color":"#fbbf24","category":"スポーツの裏技"},
+            {"id":2762,"name":"リレーの最初と最後を担当","desc":"間の人より先に、ゴールへ移動する。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2763,"name":"応援席への全振り育成","desc":"選手より、客席の息が合っている。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2764,"name":"一人用のダブルス","desc":"相方との意思疎通だけは完璧。","rarity":"SR","emoji":"⚽","color":"#c084fc","category":"スポーツの裏技"},
+            {"id":2765,"name":"打席に立つ前の祝勝会","desc":"負けた場合の片付けが、とても静かになる。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2766,"name":"敗因の事前提出","desc":"負けるまで、受理してもらえない。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2767,"name":"回転しない魔球","desc":"普通の球では、と言われると黙る。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2768,"name":"得点板の暗算勝負","desc":"試合とは別に、観客が感心している。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2769,"name":"練習で使い切った本番力","desc":"昨日までは、本当に上手かった。","rarity":"SR","emoji":"⚽","color":"#c084fc","category":"スポーツの裏技"},
+            {"id":2770,"name":"引き分けに強い必勝法","desc":"負けないことだけは、約束できる。","rarity":"C","emoji":"⚽","color":"#94a3b8","category":"スポーツの裏技"},
+            {"id":2771,"name":"ゴールした過去形の靴","desc":"これから走る理由を、説明しなければならない。","rarity":"SSR","emoji":"⚽","color":"#fbbf24","category":"スポーツの裏技"},
+            {"id":2772,"name":"競技名を変える抗議","desc":"別の競技なら、今の動きが優勝だった。","rarity":"R","emoji":"⚽","color":"#38bdf8","category":"スポーツの裏技"},
+            {"id":2773,"name":"採点基準になる選手","desc":"本人が転ぶと、全員に転倒が要求される。","rarity":"SEC","emoji":"⚽","color":"#ec4899","category":"スポーツの裏技"},
+            {"id":2774,"name":"味見用のカレー","desc":"少しずつ足していたら、カレーになった。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2775,"name":"料理長の舌打ち","desc":"客の「何か足りない」に対して加える。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2776,"name":"ひとつまみの実家","desc":"知らない家の味がする。","rarity":"SR","emoji":"🧂","color":"#c084fc","category":"隠し味"},
+            {"id":2777,"name":"昨日のため息","desc":"煮詰めると、少しだけ苦くなる。","rarity":"SSR","emoji":"🧂","color":"#fbbf24","category":"隠し味"},
+            {"id":2778,"name":"隣の席の注文","desc":"自分の皿にも入っていてほしかった味。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2779,"name":"よく振った沈黙","desc":"食卓での会話が、少なくて済む。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2780,"name":"企業秘密の水","desc":"蛇口の場所だけは教えてもらえない。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2781,"name":"仕上げの言い訳","desc":"焦げた香りに、意図が生まれる。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2782,"name":"店主の気まぐれ粉","desc":"昨日は売ってくれたのに、今日はない。","rarity":"SR","emoji":"🧂","color":"#c084fc","category":"隠し味"},
+            {"id":2783,"name":"二度目の初恋","desc":"甘いのは、最初の一口だけ。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2784,"name":"小さじ一杯の背徳感","desc":"夜中に食べると、倍量に感じる。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2785,"name":"多めの期待","desc":"入れすぎると、普通においしいだけでは足りなくなる。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2786,"name":"箱の裏のおすすめ","desc":"その通りに作った料理を、少しだけ変える。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2787,"name":"香ばしい勘違い","desc":"失敗だと気づくまでは、おいしく食べられる。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2788,"name":"見栄の大さじ","desc":"客が帰ってから、台所で味を直す。","rarity":"SSR","emoji":"🧂","color":"#fbbf24","category":"隠し味"},
+            {"id":2789,"name":"追い親切","desc":"頼んでいない具が、また一つ増える。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2790,"name":"熟成した口約束","desc":"聞かれるたびに、味が濃くなる。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2791,"name":"焦がし遠慮","desc":"最後の一口を譲り続けた結果。","rarity":"SR","emoji":"🧂","color":"#c084fc","category":"隠し味"},
+            {"id":2792,"name":"一晩寝かせた後悔","desc":"翌朝には、皿いっぱいに膨らんでいた。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2793,"name":"帰省二日目の塩加減","desc":"少しずつ、昔の自分に戻っていく。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2794,"name":"あの日の空腹","desc":"何を混ぜても、御馳走になる。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2795,"name":"おかわりの気配","desc":"鍋の底に、あと少しだけ残しておく。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2796,"name":"秘密を知る人の一滴","desc":"誰が食べたか、皿を見るだけで分かる。","rarity":"SR","emoji":"🧂","color":"#c084fc","category":"隠し味"},
+            {"id":2797,"name":"レシピから消えた一行","desc":"なくても作れるが、同じ味にはならない。","rarity":"C","emoji":"🧂","color":"#94a3b8","category":"隠し味"},
+            {"id":2798,"name":"思い出補正の原液","desc":"今食べると、記憶の方が少し変わる。","rarity":"SSR","emoji":"🧂","color":"#fbbf24","category":"隠し味"},
+            {"id":2799,"name":"二度と会わない人の好み","desc":"直す理由がなくなっても、薄味のまま。","rarity":"R","emoji":"🧂","color":"#38bdf8","category":"隠し味"},
+            {"id":2800,"name":"おいしかった記憶","desc":"何を食べても、あの日の味になる。","rarity":"SEC","emoji":"🧂","color":"#ec4899","category":"隠し味"},
+
                         // コンプリート特典 (2000) - 表示判定等で特別扱い
-            { id: 2000, name: "2000種集めても人生は変わらない真実", rarity: "COMP", emoji: "🏆", color: "#fef08a", category: "究極の真理", desc: "この2000個のガラクタを集めるために費やした時間。しかし、あなたの人生の価値はこんなものでは揺るがないという究極の悟り。" }
+            { id: 2000, name: "2300種集めても人生は変わらない真実", rarity: "COMP", emoji: "🏆", color: "#fef08a", category: "究極の真理", desc: "この2300個のガラクタを集めるために費やした時間。しかし、あなたの人生の価値はこんなものでは揺るがないという究極の悟り。" }
         ];
 
         // レア度設定
@@ -2692,7 +2994,7 @@
 
         // 通常排出アイテムリスト（COMPを除外）
         const regularGachaItems = gachaItems.filter(item => item.rarity !== 'COMP');
-        const totalRegularItems = regularGachaItems.length; // 2000
+        const totalRegularItems = regularGachaItems.length; // 2300
 
         // アプリの状態
         let state = {
@@ -2702,7 +3004,7 @@
             fakeMoneySpent: 0
         };
 
-        const STORAGE_KEY = 'mugen_gacha_v5'; // 2000種版。旧セーブは初回読込時に移行
+        const STORAGE_KEY = 'mugen_gacha_v5'; // 2300種版も同じ保存キーを使い、既存の収集・装着・回数を保持
 
         // セーフティ付きLocalStorageヘルパー (iframe対応)
         const SafeStorage = {
@@ -2733,8 +3035,9 @@
                     if (itemById.has(Number(id)) && String(Number(id)) === id && Number.isSafeInteger(count) && count > 0) collected[id] = count;
                 }
             }
-            // 増補後の特典は通常2000種を集めた時点で改めて解放する。
-            if (!regularGachaItems.every(item => collected[item.id] > 0)) delete collected[2000];
+            // 2000種版で正当に取得済みのCOMPは保持。新規取得には全2300種が必要。
+            const hasLegacyComplete = regularGachaItems.filter(item => item.id <= 2500).every(item => collected[item.id] > 0);
+            if (!hasLegacyComplete) delete collected[2000];
             const totalSpins = Number.isSafeInteger(parsed?.totalSpins) && parsed.totalSpins >= 0 ? parsed.totalSpins : 0;
             return { collected, backpack: Array.isArray(parsed?.backpack) ? [...new Set(parsed.backpack)].filter(id => Number.isInteger(id) && collected[id] > 0).slice(0, 5) : [], totalSpins, fakeMoneySpent: totalSpins * 300 };
         }
@@ -3192,6 +3495,24 @@
         const itemArtCache = new Map();
         function itemArtSpec(item) {
             const n = item.name;
+            if (item.id >= 2501) {
+                let seed=2166136261;for(const ch of n+'|'+item.category) seed=Math.imul(seed^ch.codePointAt(0),16777619)>>>0;
+                const genreKinds = {
+                    '世界の没案':['blueprint','gear','planet','abstract'],
+                    '感情の落とし物':['heart','envelope','brain','mouth'],
+                    '悪の組織の福利厚生':['devil','certificate','paper','bag'],
+                    '物語に出なかった物':['book','sword','paper','door'],
+                    '小さすぎる終末':['cracked','phone','plate','void'],
+                    '世界の人々':['person'],
+                    '残念すぎる生物':['slime','bird','fish','bug','frog','bear'],
+                    '珍行事':['festival','flag','bell','music'],
+                    '住みたくない建築物':['house','door','house','bed'],
+                    'スポーツの裏技':['ball','shoe','flag','foot'],
+                    '隠し味':['jar','bottle','plate','cup']
+                };
+                const kinds=genreKinds[item.category];
+                if (kinds) return {kind:kinds[seed%kinds.length],seed};
+            }
             const rules = [
                 [/砂時計/, "hourglass"], [/自転車|三輪車/, "bike"], [/靴下|ソックス/, "sock"], [/花火/, "bomb"],
                 [/石|砂利|鉱石|隕石|化石/, 'stone'], [/通知|未読|チャット|LINE|メッセージ/, 'chat'],
@@ -3276,6 +3597,10 @@
             const p=d=>`<path d="${d}"/>`,c=(x,y,r,fill=a)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}"/>`,r=(x,y,w,h,fill=a,rx=3)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}"/>`;
             const eyes=(x=25,y=32)=>c(x,y,1.4,ink)+c(x+14,y,1.4,ink);
             const motifs={
+                person:()=>c(32,21,10,light)+p('M20 53V42Q20 33 32 33T44 42V53Z')+r(19,10,26,5,b,2)+p('M25 42V53M39 42V53M15 40 20 35M44 35 49 40')+c(29,21,1,ink)+c(35,21,1,ink),
+                festival:()=>p('M10 15Q32 23 54 15M10 52H54M16 52V33H48V52')+p('m15 17 5 10 5-8m8 1 5 9 5-10')+c(32,40,8,b)+p('M27 40H37M32 35V45'),
+                blueprint:()=>r(12,12,40,40,'#c8e3fa',2)+p('M18 22H46M18 32H46M18 42H46M22 18V46M32 18V46M42 18V46')+p('M23 38V27L32 21 41 27V38Z'),
+                cracked:()=>c(32,32,21,light)+p('m33 12-6 13 11 7-12 11 5 10')+p('M18 26H23M41 26H46M22 42Q32 35 42 42'),
                 stone:()=>p('M14 41 19 24 35 18 48 29 51 43 37 50 21 48Z')+p('M19 24 31 34 48 29M31 34 37 50M14 41 31 34'),
                 chat:()=>p('M12 18H52V43H31L21 51V43H12Z')+c(23,30,2,ink)+c(32,30,2,ink)+c(41,30,2,ink)+c(49,17,7,b),
                 silence:()=>[21,32,43].map(x=>c(x,32,2.5,ink)).join('')+p('M17 45H47'),
